@@ -11,120 +11,96 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html { -webkit-text-size-adjust: 100%; }
-    body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1e293b; line-height: 1.6; overflow-x: hidden; background: #fff; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1e293b; line-height: 1.6; overflow-x: hidden; background: #fff; -webkit-font-smoothing: antialiased; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
     a { text-decoration: none; color: inherit; }
-
-    @keyframes fadeInUp { from { opacity: 0; -webkit-transform: translateY(40px); transform: translateY(40px); } to { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); } }
-    @keyframes float { 0%, 100% { -webkit-transform: translateY(0); transform: translateY(0); } 50% { -webkit-transform: translateY(-15px); transform: translateY(-15px); } }
-    @keyframes pulse { 0%, 100% { -webkit-transform: scale(1); transform: scale(1); } 50% { -webkit-transform: scale(1.08); transform: scale(1.08); } }
-
-    .reveal { opacity: 0; -webkit-transform: translateY(30px); transform: translateY(30px); -webkit-transition: all 0.6s ease; transition: all 0.6s ease; }
-    .reveal.active { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); }
-    .delay-1 { -webkit-transition-delay: 0.1s; transition-delay: 0.1s; }
-    .delay-2 { -webkit-transition-delay: 0.2s; transition-delay: 0.2s; }
-    .delay-3 { -webkit-transition-delay: 0.3s; transition-delay: 0.3s; }
-
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
     .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #ea580c, #fbbf24); width: 0%; z-index: 99999; }
-
     header { background: #fff; box-shadow: 0 2px 15px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; }
-    .nav { display: -webkit-flex; display: flex; -webkit-justify-content: space-between; justify-content: space-between; -webkit-align-items: center; align-items: center; padding: 12px 0; position: relative; }
-    .logo { font-size: 20px; font-weight: 800; color: #1d4ed8; }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; position: relative; }
+    .logo { font-size: 22px; font-weight: 800; color: #1d4ed8; }
     .logo span { color: #ea580c; }
     nav { position: relative; }
-    nav ul { display: -webkit-flex; display: flex; list-style: none; gap: 20px; margin: 0; padding: 0; }
+    nav ul { display: flex; list-style: none; gap: 20px; margin: 0; padding: 0; }
     nav a { color: #334155; font-weight: 600; display: block; }
-
-    .btn { background: #ea580c; color: #fff; padding: 12px 22px; border-radius: 25px; font-weight: 600; display: inline-block; border: none; cursor: pointer; font-size: 15px; -webkit-appearance: none; appearance: none; touch-action: manipulation; }
-    .btn:active { opacity: 0.9; }
+    .btn { background: #ea580c; color: #fff; padding: 12px 22px; border-radius: 25px; font-weight: 600; display: inline-block; border: none; cursor: pointer; font-size: 15px; -webkit-appearance: none; }
     .btn-outline { background: transparent; border: 2px solid #fff; color: #fff; }
-    .menu-toggle { display: none; font-size: 26px; background: none; border: none; color: #1d4ed8; padding: 8px 12px; cursor: pointer; -webkit-appearance: none; }
-
-    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%); color: #fff; padding: 100px 0 80px; text-align: center; position: relative; }
+    .menu-toggle { display: none; font-size: 26px; background: none; border: none; color: #1d4ed8; padding: 8px 12px; cursor: pointer; }
+    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%); color: #fff; padding: 100px 0 80px; text-align: center; }
     .hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 14px; line-height: 1.2; }
     .hero h1 span { color: #fbbf24; }
     .hero p { font-size: 16px; margin-bottom: 24px; opacity: 0.95; }
-    .hero-buttons { display: -webkit-flex; display: flex; gap: 12px; -webkit-justify-content: center; justify-content: center; -webkit-flex-wrap: wrap; flex-wrap: wrap; }
+    .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 12px; margin-bottom: 14px; }
-
     .stats { background: #fff; padding: 0 0 40px; margin-top: -30px; position: relative; z-index: 5; }
-    .stats-grid { display: -webkit-grid; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; background: #fff; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); padding: 24px 12px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; background: #fff; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); padding: 24px 12px; }
     .stat { text-align: center; }
     .stat-number { font-size: 32px; font-weight: 800; color: #1d4ed8; }
     .stat-label { color: #64748b; font-size: 12px; margin-top: 4px; }
-
     section { padding: 50px 0; }
     .section-title { text-align: center; font-size: 26px; margin-bottom: 8px; color: #0f172a; font-weight: 800; }
     .section-title::after { content: ''; display: block; width: 50px; height: 3px; background: #ea580c; margin: 8px auto 0; border-radius: 2px; }
     .section-subtitle { text-align: center; color: #64748b; margin-bottom: 30px; font-size: 15px; }
-    .grid { display: -webkit-grid; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
     .card { background: #fff; padding: 24px 16px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); text-align: center; }
     .card i { font-size: 36px; color: #1d4ed8; margin-bottom: 10px; display: block; }
     .card h3 { margin-bottom: 6px; color: #0f172a; font-size: 16px; }
     .card p { font-size: 14px; color: #64748b; }
-
     .process { background: #f8fafc; }
-    .process-grid { display: -webkit-grid; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     .process-step { text-align: center; }
-    .step-number { width: 50px; height: 50px; background: #1d4ed8; color: #fff; border-radius: 50%; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; font-size: 20px; font-weight: 800; margin: 0 auto 10px; }
+    .step-number { width: 50px; height: 50px; background: #1d4ed8; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; margin: 0 auto 10px; }
     .process-step h3 { font-size: 14px; margin-bottom: 4px; }
     .process-step p { font-size: 12px; color: #64748b; }
-
-    .course-grid { display: -webkit-grid; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
     .course { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
-    .course-header { height: 90px; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; color: #fff; font-size: 18px; font-weight: 700; }
+    .course-header { height: 90px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; font-weight: 700; }
     .course-body { padding: 16px; }
     .course-body p { font-size: 14px; color: #64748b; margin-bottom: 8px; }
     .price { font-size: 15px; color: #ea580c; font-weight: 700; margin-bottom: 10px; }
-
     .faculty-section { background: #f8fafc; }
-    .faculty-grid { display: -webkit-grid; display: grid; grid-template-columns: 160px 1fr; gap: 16px; -webkit-align-items: center; align-items: center; }
+    .faculty-grid { display: grid; grid-template-columns: 160px 1fr; gap: 16px; align-items: center; }
     .faculty-card { background: #fff; padding: 20px; border-radius: 16px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
     .faculty-card img { width: 100%; max-width: 140px; border-radius: 12px; }
     .faculty-card h3 { font-size: 16px; color: #1d4ed8; margin-top: 8px; }
     .faculty-card p { font-size: 13px; }
-
     .testimonials { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: #fff; }
     .testimonials .section-title, .testimonials .section-subtitle { color: #fff; }
     .testimonial { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; }
     .testimonial p { font-size: 14px; margin-bottom: 8px; }
     .stars { color: #fbbf24; margin-bottom: 8px; }
-
-    .contact-grid { display: -webkit-grid; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .contact-info div { margin-bottom: 14px; font-size: 14px; display: -webkit-flex; display: flex; -webkit-align-items: flex-start; align-items: flex-start; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .contact-info div { margin-bottom: 14px; font-size: 14px; display: flex; align-items: flex-start; }
     .contact-info i { color: #1d4ed8; margin-right: 10px; width: 18px; }
-
     .enquiry { background: #f8fafc; }
     .enquiry-form { background: #fff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
     .form-group { margin-bottom: 12px; }
     .form-group label { display: block; margin-bottom: 4px; font-weight: 600; color: #334155; font-size: 14px; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 16px; font-family: inherit; -webkit-appearance: none; appearance: none; background: #fff; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 16px; font-family: inherit; -webkit-appearance: none; background: #fff; }
     .form-group textarea { min-height: 80px; }
     .form-success { display: none; background: #dcfce7; color: #166534; padding: 14px; border-radius: 10px; text-align: center; margin-top: 10px; font-weight: 600; }
-
     .cta { background: #ea580c; color: #fff; text-align: center; padding: 50px 0; }
     .cta h2 { font-size: 26px; margin-bottom: 10px; }
     .cta p { margin-bottom: 16px; }
-
-    .whatsapp-float { position: fixed; bottom: 20px; right: 16px; background: #25d366; color: #fff; width: 54px; height: 54px; border-radius: 50%; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 15px rgba(37,211,102,0.4); z-index: 999; }
-
+    .whatsapp-float { position: fixed; bottom: 20px; right: 16px; background: #25d366; color: #fff; width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 4px 15px rgba(37,211,102,0.4); z-index: 999; }
     footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 24px 0; font-size: 13px; }
     #hiddenFrame { display: none; }
-
-    /* Mobile */
     @media (max-width: 768px) {
       .menu-toggle { display: block; }
       .desktop-btn { display: none; }
-      nav ul { display: none; position: absolute; top: 100%; left: -16px; right: -16px; background: #fff; -webkit-flex-direction: column; flex-direction: column; padding: 8px 0; box-shadow: 0 8px 25px rgba(0,0,0,0.15); z-index: 9999; }
-      nav ul.active { display: -webkit-flex; display: flex; }
+      nav ul { display: none; position: absolute; top: 100%; left: -16px; right: -16px; background: #fff; flex-direction: column; padding: 8px 0; box-shadow: 0 8px 25px rgba(0,0,0,0.15); z-index: 9999; }
+      nav ul.active { display: flex; }
       nav ul li { border-bottom: 1px solid #f1f5f9; }
-      nav ul li:last-child { border-bottom: none; }
       nav ul a { padding: 14px 20px; font-size: 16px; }
       .hero { padding: 80px 0 60px; }
       .hero h1 { font-size: 28px; }
       .hero p { font-size: 14px; padding: 0 8px; }
-      .hero-buttons { -webkit-flex-direction: column; flex-direction: column; -webkit-align-items: center; align-items: center; }
+      .hero-buttons { flex-direction: column; align-items: center; }
       .hero-buttons .btn { width: 70%; text-align: center; }
       .stats-grid { grid-template-columns: 1fr 1fr; padding: 16px 10px; gap: 10px; }
       .stat-number { font-size: 28px; }
@@ -147,7 +123,7 @@
   <div class="progress-bar" id="progressBar"></div>
   <header>
     <div class="container nav">
-      <div class="logo">Sector <span>SSC</span></div>
+      <div class="logo">Sector <span>SSC</span> Classes</div>
       <nav>
         <ul id="menu">
           <li><a href="#home">Home</a></li>
@@ -162,11 +138,10 @@
       <button class="menu-toggle" id="menuToggle" type="button">☰</button>
     </div>
   </header>
-
   <section class="hero" id="home">
     <div class="container">
       <div class="badge">Jaipur's Trusted SSC Coaching</div>
-      <h1>Selection मतलब<br><span>Sector SSC</span></h1>
+      <h1>Selection मतलब<br><span>Sector SSC Classes</span></h1>
       <p>Expert faculty, regular mock tests & proven results for SSC CGL, CHSL, Railway, Delhi Police & more.</p>
       <div class="hero-buttons">
         <a href="#courses" class="btn">View Courses</a>
@@ -174,7 +149,6 @@
       </div>
     </div>
   </section>
-
   <div class="stats">
     <div class="container">
       <div class="stats-grid">
@@ -185,7 +159,6 @@
       </div>
     </div>
   </div>
-
   <section id="why">
     <div class="container">
       <h2 class="section-title reveal">Why Choose Us</h2>
@@ -198,7 +171,6 @@
       </div>
     </div>
   </section>
-
   <section class="process">
     <div class="container">
       <h2 class="section-title reveal">How We Prepare You</h2>
@@ -211,7 +183,6 @@
       </div>
     </div>
   </section>
-
   <section class="faculty-section" id="faculty">
     <div class="container">
       <h2 class="section-title reveal">Our Faculty</h2>
@@ -236,7 +207,6 @@
       </div>
     </div>
   </section>
-
   <section id="courses">
     <div class="container">
       <h2 class="section-title reveal">Our Courses</h2>
@@ -252,7 +222,6 @@
       </div>
     </div>
   </section>
-
   <section class="testimonials">
     <div class="container">
       <h2 class="section-title reveal">Testimonials</h2>
@@ -264,7 +233,6 @@
       </div>
     </div>
   </section>
-
   <section class="cta">
     <div class="container">
       <h2>Start Today</h2>
@@ -272,7 +240,6 @@
       <a href="#enquiry" class="btn" style="background:#25d366;">Enquire Now</a>
     </div>
   </section>
-
   <section class="enquiry" id="enquiry">
     <div class="container">
       <h2 class="section-title reveal">Enquire Now</h2>
@@ -294,7 +261,6 @@
       </div>
     </div>
   </section>
-
   <section class="contact" id="contact">
     <div class="container">
       <h2 class="section-title reveal">Contact Us</h2>
@@ -309,10 +275,8 @@
       </div>
     </div>
   </section>
-
   <footer><div class="container"><p>&copy; 2026 Sector SSC Classes</p><p>Phone: 085020 28502 | Jaipur</p></div></footer>
   <a href="https://wa.me/918502028502" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
-
   <script>
     document.getElementById('menuToggle').addEventListener('click', function(e) {
       e.preventDefault();
@@ -320,35 +284,26 @@
       document.getElementById('menu').classList.toggle('active');
     });
     document.querySelectorAll('#menu a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        document.getElementById('menu').classList.remove('active');
-      });
+      link.addEventListener('click', function() { document.getElementById('menu').classList.remove('active'); });
     });
     document.addEventListener('click', function(e) {
       var menu = document.getElementById('menu');
       var toggle = document.getElementById('menuToggle');
-      if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-        menu.classList.remove('active');
-      }
+      if (!menu.contains(e.target) && !toggle.contains(e.target)) menu.classList.remove('active');
     });
-
     window.addEventListener('scroll', function() {
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       document.getElementById('progressBar').style.width = (scrollTop / height * 100) + '%';
     });
-
     var reveals = document.querySelectorAll('.reveal');
     function checkReveal() {
       for (var i = 0; i < reveals.length; i++) {
-        if (reveals[i].getBoundingClientRect().top < window.innerHeight - 60) {
-          reveals[i].classList.add('active');
-        }
+        if (reveals[i].getBoundingClientRect().top < window.innerHeight - 60) reveals[i].classList.add('active');
       }
     }
     window.addEventListener('scroll', checkReveal);
     checkReveal();
-
     var counters = document.querySelectorAll('.stat-number');
     var counted = false;
     function animateCounters() {
@@ -371,7 +326,6 @@
     }
     window.addEventListener('scroll', animateCounters);
     animateCounters();
-
     document.getElementById('enquiryForm').addEventListener('submit', function() {
       var btn = document.getElementById('submitBtn');
       var success = document.getElementById('formSuccess');
