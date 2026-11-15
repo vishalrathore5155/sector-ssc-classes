@@ -8,112 +8,132 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body { font-family: 'Poppins', system-ui, sans-serif; color: #1e293b; line-height: 1.6; overflow-x: hidden; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     a { text-decoration: none; }
 
     /* Animations */
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes countUp { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-    .animate-up { animation: fadeInUp 0.8s ease forwards; }
-    .animate-fade { animation: fadeIn 1s ease forwards; }
-    .float { animation: float 3s ease-in-out infinite; }
-    .pulse { animation: pulse 2s ease-in-out infinite; }
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
     /* Header */
-    header { background: #fff; box-shadow: 0 2px 20px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; }
+    header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; }
     .nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; }
     .logo { font-size: 26px; font-weight: 800; color: #1d4ed8; }
     .logo span { color: #ea580c; }
     nav ul { display: flex; list-style: none; gap: 28px; }
-    nav a { color: #334155; font-weight: 500; transition: 0.3s; }
+    nav a { color: #334155; font-weight: 500; transition: 0.3s; position: relative; }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #1d4ed8; transition: 0.3s; }
+    nav a:hover::after { width: 100%; }
     nav a:hover { color: #1d4ed8; }
     .btn { background: linear-gradient(135deg, #ea580c, #f97316); color: white; padding: 12px 28px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(234,88,12,0.3); }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(234,88,12,0.4); }
+    .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px rgba(234,88,12,0.4); }
     .menu-toggle { display: none; font-size: 26px; cursor: pointer; }
 
     /* Hero */
-    .hero { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #3b82f6 100%); color: white; padding: 120px 0 100px; text-align: center; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); animation: float 6s ease-in-out infinite; }
-    .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; animation: fadeInUp 0.8s ease; }
-    .hero p { font-size: 20px; margin-bottom: 30px; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; animation: fadeInUp 1s ease 0.2s both; }
-    .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 1s ease 0.4s both; }
+    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 40%, #1d4ed8 100%); color: white; padding: 140px 0 120px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .hero-content { position: relative; z-index: 2; }
+    .hero h1 { font-size: 56px; font-weight: 800; margin-bottom: 20px; line-height: 1.15; animation: fadeInUp 0.8s ease; }
+    .hero h1 span { color: #fbbf24; }
+    .hero p { font-size: 20px; margin-bottom: 35px; opacity: 0.95; max-width: 750px; margin-left: auto; margin-right: auto; animation: fadeInUp 1s ease 0.2s both; }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 1s ease 0.4s both; }
     .btn-outline { background: transparent; border: 2px solid white; color: white; box-shadow: none; }
     .btn-outline:hover { background: white; color: #1d4ed8; }
+    .badge { display: inline-block; background: rgba(255,255,255,0.15); padding: 8px 18px; border-radius: 50px; font-size: 14px; margin-bottom: 20px; animation: fadeInUp 0.6s ease; }
 
     /* Stats */
-    .stats { background: #fff; padding: 50px 0; margin-top: -40px; position: relative; z-index: 10; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); padding: 40px; }
-    .stat { text-align: center; }
-    .stat-number { font-size: 42px; font-weight: 800; color: #1d4ed8; }
-    .stat-label { color: #64748b; font-size: 15px; margin-top: 5px; }
+    .stats { background: #fff; padding: 0 0 60px; margin-top: -50px; position: relative; z-index: 10; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.12); padding: 40px 30px; }
+    .stat { text-align: center; padding: 10px; }
+    .stat-number { font-size: 48px; font-weight: 800; background: linear-gradient(135deg, #1d4ed8, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { color: #64748b; font-size: 15px; margin-top: 8px; font-weight: 500; }
 
     /* Sections */
-    section { padding: 80px 0; }
-    .section-title { text-align: center; font-size: 38px; margin-bottom: 12px; color: #0f172a; }
+    section { padding: 90px 0; }
+    .section-title { text-align: center; font-size: 40px; margin-bottom: 14px; color: #0f172a; font-weight: 800; }
     .section-subtitle { text-align: center; color: #64748b; margin-bottom: 50px; font-size: 18px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
-    .card { background: white; padding: 35px 24px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); text-align: center; transition: 0.4s; }
-    .card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.12); }
-    .card i { font-size: 42px; color: #1d4ed8; margin-bottom: 16px; transition: 0.3s; }
-    .card:hover i { transform: scale(1.15); color: #ea580c; }
-    .card h3 { margin-bottom: 8px; color: #0f172a; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 28px; }
+    .card { background: white; padding: 40px 28px; border-radius: 24px; box-shadow: 0 4px 25px rgba(0,0,0,0.06); text-align: center; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid #f1f5f9; }
+    .card:hover { transform: translateY(-12px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+    .card i { font-size: 48px; color: #1d4ed8; margin-bottom: 18px; transition: 0.4s; }
+    .card:hover i { transform: scale(1.2) rotate(5deg); color: #ea580c; }
+    .card h3 { margin-bottom: 10px; color: #0f172a; font-size: 20px; }
+
+    /* Process */
+    .process { background: linear-gradient(135deg, #f8fafc, #eff6ff); }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+    .process-step { text-align: center; position: relative; }
+    .step-number { width: 70px; height: 70px; background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; margin: 0 auto 16px; box-shadow: 0 8px 25px rgba(29,78,216,0.3); }
+    .process-step h3 { margin-bottom: 8px; }
 
     /* Courses */
-    .courses { background: #f8fafc; }
-    .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
-    .course { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 6px 25px rgba(0,0,0,0.08); transition: 0.4s; }
-    .course:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
-    .course-header { height: 140px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 700; position: relative; overflow: hidden; }
-    .course-header::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s; }
+    .courses { background: #fff; }
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .course { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.08); transition: 0.4s; border: 1px solid #f1f5f9; }
+    .course:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+    .course-header { height: 160px; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px; font-weight: 700; position: relative; overflow: hidden; }
+    .course-header::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transition: 0.6s; }
     .course:hover .course-header::after { left: 100%; }
-    .course-body { padding: 24px; }
-    .price { font-size: 24px; color: #ea580c; font-weight: 700; margin: 10px 0; }
+    .course-body { padding: 28px; }
+    .price { font-size: 26px; color: #ea580c; font-weight: 700; margin: 12px 0; }
 
     /* Faculty */
-    .faculty-section { background: #fff; }
+    .faculty-section { background: #f8fafc; }
     .faculty-grid { display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: center; margin-top: 30px; }
-    .faculty-card { background: #f8fafc; padding: 30px; border-radius: 20px; margin-bottom: 40px; transition: 0.3s; }
-    .faculty-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-    .faculty-card img { transition: 0.4s; }
-    .faculty-card:hover img { transform: scale(1.05); }
+    .faculty-card { background: white; padding: 35px; border-radius: 24px; margin-bottom: 40px; transition: 0.4s; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .faculty-card:hover { box-shadow: 0 15px 40px rgba(0,0,0,0.1); transform: translateY(-5px); }
+    .faculty-card img { transition: 0.4s; border-radius: 16px; }
+    .faculty-card:hover img { transform: scale(1.03); }
 
     /* Testimonials */
-    .testimonials { background: linear-gradient(135deg, #1e3a8a, #1d4ed8); color: white; }
+    .testimonials { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: white; }
     .testimonials .section-title, .testimonials .section-subtitle { color: white; }
-    .testimonial { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 28px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.2); }
-    .stars { color: #fbbf24; margin-bottom: 10px; }
+    .testimonial { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); padding: 32px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; }
+    .testimonial:hover { background: rgba(255,255,255,0.12); transform: translateY(-5px); }
+    .stars { color: #fbbf24; margin-bottom: 12px; font-size: 18px; }
 
     /* Contact */
-    .contact { background: #f8fafc; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    .contact-info div { margin-bottom: 16px; font-size: 17px; }
-    .contact-info i { color: #1d4ed8; margin-right: 10px; width: 20px; }
+    .contact { background: #fff; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+    .contact-info div { margin-bottom: 20px; font-size: 17px; display: flex; align-items: flex-start; }
+    .contact-info i { color: #1d4ed8; margin-right: 14px; width: 24px; font-size: 20px; margin-top: 2px; }
 
     /* CTA */
-    .cta { background: linear-gradient(135deg, #ea580c, #f97316); color: white; text-align: center; padding: 80px 0; }
-    .cta h2 { font-size: 36px; margin-bottom: 12px; }
+    .cta { background: linear-gradient(135deg, #ea580c, #f97316); color: white; text-align: center; padding: 90px 0; position: relative; overflow: hidden; }
+    .cta::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: rgba(255,255,255,0.1); border-radius: 50%; }
+    .cta h2 { font-size: 40px; margin-bottom: 14px; position: relative; }
+    .cta p { font-size: 18px; opacity: 0.95; position: relative; }
 
     /* WhatsApp Float */
-    .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 20px rgba(37,211,102,0.4); z-index: 999; transition: 0.3s; animation: pulse 2s infinite; }
-    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 6px 25px rgba(37,211,102,0.45); z-index: 999; transition: 0.3s; animation: pulse 2.5s infinite; }
+    .whatsapp-float:hover { transform: scale(1.12); }
 
-    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px 0; }
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 35px 0; }
 
     @media (max-width: 768px) {
       nav ul { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; gap: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
       nav ul.active { display: flex; }
       .menu-toggle { display: block; }
-      .hero h1 { font-size: 34px; }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 36px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; padding: 25px 15px; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
       .faculty-grid { grid-template-columns: 1fr !important; text-align: center; }
+      .stat-number { font-size: 36px; }
+    }
+    @media (max-width: 480px) {
+      .process-grid { grid-template-columns: 1fr; }
+      .hero { padding: 100px 0 80px; }
     }
   </style>
 </head>
@@ -137,12 +157,13 @@
   </header>
 
   <section class="hero" id="home">
-    <div class="container">
-      <h1>Best SSC Coaching<br>for Your Success</h1>
-      <p>Expert faculty, regular mock tests & proven results for SSC CGL, CHSL, MTS & GD in Jaipur.</p>
+    <div class="hero-content container">
+      <div class="badge"><i class="fas fa-star"></i> Jaipur's Trusted SSC Coaching</div>
+      <h1>Best SSC Coaching<br><span>for Your Success</span></h1>
+      <p>Expert faculty, regular mock tests & proven results for SSC CGL, CHSL, MTS & GD. Small batches with personal attention in Jhotwara, Jaipur.</p>
       <div class="hero-buttons">
         <a href="#courses" class="btn">View Courses</a>
-        <a href="https://wa.me/918502028502" class="btn btn-outline" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://wa.me/918502028502" class="btn btn-outline" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
       </div>
     </div>
   </section>
@@ -150,35 +171,48 @@
   <div class="stats">
     <div class="container">
       <div class="stats-grid">
-        <div class="stat"><div class="stat-number">9+</div><div class="stat-label">Years Experience</div></div>
-        <div class="stat"><div class="stat-number">500+</div><div class="stat-label">Students Selected</div></div>
-        <div class="stat"><div class="stat-number">3</div><div class="stat-label">Expert Faculty</div></div>
-        <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Personal Attention</div></div>
+        <div class="stat reveal"><div class="stat-number" data-target="9">0</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat reveal"><div class="stat-number" data-target="500">0</div><div class="stat-label">Students Selected</div></div>
+        <div class="stat reveal"><div class="stat-number" data-target="3">0</div><div class="stat-label">Expert Faculty</div></div>
+        <div class="stat reveal"><div class="stat-number" data-target="100">0</div><div class="stat-label">% Personal Attention</div></div>
       </div>
     </div>
   </div>
 
   <section id="why">
     <div class="container">
-      <h2 class="section-title">Why Choose Sector SSC Classes</h2>
-      <p class="section-subtitle">Focused preparation with personal attention</p>
+      <h2 class="section-title reveal">Why Choose Sector SSC Classes</h2>
+      <p class="section-subtitle reveal">Focused preparation with personal attention</p>
       <div class="grid">
-        <div class="card"><i class="fas fa-chalkboard-teacher"></i><h3>Expert Faculty</h3><p>Experienced teachers with deep knowledge of SSC exam pattern.</p></div>
-        <div class="card"><i class="fas fa-file-alt"></i><h3>Regular Mock Tests</h3><p>Weekly tests to improve speed, accuracy and time management.</p></div>
-        <div class="card"><i class="fas fa-book"></i><h3>Study Material</h3><p>Updated notes, practice sets and previous year papers.</p></div>
-        <div class="card"><i class="fas fa-users"></i><h3>Small Batches</h3><p>Personal attention and doubt clearing in every class.</p></div>
+        <div class="card reveal"><i class="fas fa-chalkboard-teacher"></i><h3>Expert Faculty</h3><p>Experienced teachers with deep knowledge of SSC exam pattern and proven track record.</p></div>
+        <div class="card reveal"><i class="fas fa-file-alt"></i><h3>Regular Mock Tests</h3><p>Weekly tests to improve speed, accuracy and time management for real exam conditions.</p></div>
+        <div class="card reveal"><i class="fas fa-book-open"></i><h3>Study Material</h3><p>Updated notes, practice sets and previous year papers covering complete syllabus.</p></div>
+        <div class="card reveal"><i class="fas fa-users"></i><h3>Small Batches</h3><p>Personal attention and dedicated doubt clearing sessions in every class.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="container">
+      <h2 class="section-title reveal">How We Prepare You</h2>
+      <p class="section-subtitle reveal">Simple 4-step process for your selection</p>
+      <div class="process-grid">
+        <div class="process-step reveal"><div class="step-number">1</div><h3>Concept Building</h3><p>Strong foundation with clear explanations of every topic.</p></div>
+        <div class="process-step reveal"><div class="step-number">2</div><h3>Practice</h3><p>Daily practice sets and topic-wise questions for mastery.</p></div>
+        <div class="process-step reveal"><div class="step-number">3</div><h3>Mock Tests</h3><p>Full-length tests in exam-like environment with analysis.</p></div>
+        <div class="process-step reveal"><div class="step-number">4</div><h3>Selection</h3><p>Revision strategy and final preparation for your success.</p></div>
       </div>
     </div>
   </section>
 
   <section class="faculty-section" id="faculty">
     <div class="container">
-      <h2 class="section-title">Our Expert Faculty</h2>
-      <p class="section-subtitle">Learn from experienced mentors</p>
-      <div class="faculty-card">
+      <h2 class="section-title reveal">Our Expert Faculty</h2>
+      <p class="section-subtitle reveal">Learn from experienced mentors</p>
+      <div class="faculty-card reveal">
         <div class="faculty-grid">
           <div style="text-align:center;">
-            <img src="faculty.jpg" alt="Manjeet Singh Chauhan" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.15);">
+            <img src="faculty.jpg" alt="Manjeet Singh Chauhan" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15);">
             <h3 style="margin-top:16px; color:#1d4ed8;">Manjeet Singh Chauhan</h3>
             <p style="color:#64748b; font-size:15px;">Founder & English Grammar Faculty</p>
             <p style="color:#ea580c; font-weight:600; margin-top:6px;">9+ Years Experience</p>
@@ -186,9 +220,9 @@
           <div>
             <p style="margin-bottom:14px;"><strong>Manjeet Singh Chauhan</strong> is an experienced English Grammar Faculty and the Founder of SECTOR SSC Classes, with over <strong>9+ years</strong> of dedicated teaching experience in competitive examination preparation.</p>
             <p style="margin-bottom:14px;">With a strong command of English Grammar and Vocabulary, he has guided numerous aspirants towards success in SSC, Railway, NDA and XY Group examinations.</p>
-            <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-top:16px;">
+            <div style="background:#f1f5f9; padding:18px; border-radius:12px; margin-top:16px;">
               <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
-              <ul style="margin:8px 0 0 18px; color:#334155;">
+              <ul style="margin:10px 0 0 18px; color:#334155;">
                 <li>English Grammar & Vocabulary</li>
                 <li>SSC CGL, CHSL, CPO, Stenographer</li>
                 <li>Railway, NDA & XY Group</li>
@@ -198,10 +232,10 @@
           </div>
         </div>
       </div>
-      <div class="faculty-card">
+      <div class="faculty-card reveal">
         <div class="faculty-grid">
           <div style="text-align:center;">
-            <img src="pradeep.jpg" alt="Pradeep Singh Rathore" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.15);">
+            <img src="pradeep.jpg" alt="Pradeep Singh Rathore" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15);">
             <h3 style="margin-top:16px; color:#1d4ed8;">Pradeep Singh Rathore</h3>
             <p style="color:#64748b; font-size:15px;">Senior Mathematics Faculty</p>
             <p style="color:#ea580c; font-weight:600; margin-top:6px;">14+ Years Experience</p>
@@ -209,9 +243,9 @@
           <div>
             <p style="margin-bottom:14px;"><strong>Pradeep Singh Rathore</strong> is an experienced Mathematics Faculty at SECTOR SSC Classes, bringing over <strong>14 years</strong> of excellence in teaching Mathematics for competitive examinations.</p>
             <p style="margin-bottom:14px;">Known for his strong mathematical concepts, exceptional teaching methodology and student-friendly approach, Pradeep Sir has helped countless aspirants develop confidence and accuracy in Mathematics.</p>
-            <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-top:16px;">
+            <div style="background:#f1f5f9; padding:18px; border-radius:12px; margin-top:16px;">
               <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
-              <ul style="margin:8px 0 0 18px; color:#334155;">
+              <ul style="margin:10px 0 0 18px; color:#334155;">
                 <li>Advanced Mathematics: Arithmetic, Algebra, Geometry</li>
                 <li>Quantitative Aptitude & Shortcut Techniques</li>
                 <li>SSC CGL, CHSL, CPO, Railway, NDA</li>
@@ -221,20 +255,20 @@
           </div>
         </div>
       </div>
-      <div class="faculty-card">
+      <div class="faculty-card reveal">
         <div class="faculty-grid">
           <div style="text-align:center;">
-            <img src="vinit.jpg" alt="Vinit Mangal" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.15);">
+            <img src="vinit.jpg" alt="Vinit Mangal" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15);">
             <h3 style="margin-top:16px; color:#1d4ed8;">Vinit Mangal</h3>
             <p style="color:#64748b; font-size:15px;">Senior Reasoning Faculty</p>
             <p style="color:#ea580c; font-weight:600; margin-top:6px;">12+ Years Experience</p>
           </div>
           <div>
             <p style="margin-bottom:14px;"><strong>Vinit Mangal Sir</strong> is an experienced Reasoning Faculty at SECTOR SSC Classes, with over <strong>12 years</strong> of dedicated teaching experience in competitive examination preparation.</p>
-            <p style="margin-bottom:14px;">Renowned for his excellent teaching methodology, logical approach and ability to simplify complex reasoning concepts, Vinit Sir has helped numerous aspirants strengthen their analytical thinking and problem-solving abilities.</p>
-            <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-top:16px;">
+            <p style="margin-bottom:14px;">Renowned for his excellent teaching methodology, logical approach and ability to simplify complex reasoning concepts, Vinit Sir has helped numerous aspirants strengthen their analytical thinking.</p>
+            <div style="background:#f1f5f9; padding:18px; border-radius:12px; margin-top:16px;">
               <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
-              <ul style="margin:8px 0 0 18px; color:#334155;">
+              <ul style="margin:10px 0 0 18px; color:#334155;">
                 <li>Verbal & Non-Verbal Reasoning</li>
                 <li>Seating Arrangement, Puzzles, Syllogism</li>
                 <li>SSC CGL, CHSL, CPO, Railway, NDA</li>
@@ -249,24 +283,24 @@
 
   <section class="courses" id="courses">
     <div class="container">
-      <h2 class="section-title">Our Courses</h2>
-      <p class="section-subtitle">Complete preparation for all SSC exams</p>
+      <h2 class="section-title reveal">Our Courses</h2>
+      <p class="section-subtitle reveal">Complete preparation for all SSC exams</p>
       <div class="course-grid">
-        <div class="course"><div class="course-header" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);">SSC CGL</div><div class="course-body"><p>Complete coverage of Tier 1 & Tier 2 with mock tests and notes.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
-        <div class="course"><div class="course-header" style="background:linear-gradient(135deg,#ea580c,#f97316);">SSC CHSL</div><div class="course-body"><p>Focused preparation for CHSL with regular practice and guidance.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
-        <div class="course"><div class="course-header" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">SSC MTS & GD</div><div class="course-body"><p>Special batches for MTS and GD with concept clarity and tests.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);">SSC CGL</div><div class="course-body"><p>Complete coverage of Tier 1 & Tier 2 with mock tests, notes and personal guidance.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#ea580c,#f97316);">SSC CHSL</div><div class="course-body"><p>Focused preparation for CHSL with regular practice, tests and doubt sessions.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">SSC MTS & GD</div><div class="course-body"><p>Special batches for MTS and GD with concept clarity, practice and tests.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
       </div>
     </div>
   </section>
 
   <section class="testimonials" id="testimonials">
     <div class="container">
-      <h2 class="section-title">Student Testimonials</h2>
-      <p class="section-subtitle">What our students say</p>
+      <h2 class="section-title reveal">Student Testimonials</h2>
+      <p class="section-subtitle reveal">What our students say about us</p>
       <div class="grid">
-        <div class="testimonial"><div class="stars">★★★★★</div><p>"Teachers explain concepts very clearly. Regular mock tests helped me a lot. Highly recommended for SSC."</p><strong>- Rohit Sharma</strong><br><small>SSC CGL</small></div>
-        <div class="testimonial"><div class="stars">★★★★★</div><p>"Best coaching in Jhotwara area. Study material is excellent and doubt sessions are very helpful."</p><strong>- Priya Yadav</strong><br><small>SSC CHSL</small></div>
-        <div class="testimonial"><div class="stars">★★★★★</div><p>"Faculty is supportive and classes are well structured. Cleared my exam with good preparation."</p><strong>- Amit Kumar</strong><br><small>SSC GD</small></div>
+        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Teachers explain concepts very clearly. Regular mock tests helped me a lot. Highly recommended for SSC preparation."</p><strong style="display:block; margin-top:12px;">- Rohit Sharma</strong><small>SSC CGL Selected</small></div>
+        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Best coaching in Jhotwara area. Study material is excellent and doubt sessions are very helpful for students."</p><strong style="display:block; margin-top:12px;">- Priya Yadav</strong><small>SSC CHSL Selected</small></div>
+        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Faculty is supportive and classes are well structured. Cleared my exam with good preparation and confidence."</p><strong style="display:block; margin-top:12px;">- Amit Kumar</strong><small>SSC GD Selected</small></div>
       </div>
     </div>
   </section>
@@ -274,23 +308,23 @@
   <section class="cta">
     <div class="container">
       <h2>Start Your SSC Preparation Today</h2>
-      <p>Limited seats available. Call or WhatsApp now.</p>
-      <a href="https://wa.me/918502028502" class="btn" target="_blank" style="background:#25d366; margin-top:15px;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+      <p>Limited seats available. Call or WhatsApp now for admission details.</p>
+      <a href="https://wa.me/918502028502" class="btn" target="_blank" style="background:#25d366; margin-top:20px; font-size:16px;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
     </div>
   </section>
 
   <section class="contact" id="contact">
     <div class="container">
-      <h2 class="section-title">Contact Us</h2>
-      <p class="section-subtitle">Visit our center or call for admission</p>
+      <h2 class="section-title reveal">Contact Us</h2>
+      <p class="section-subtitle reveal">Visit our center or call for admission</p>
       <div class="contact-grid">
-        <div class="contact-info">
-          <div><i class="fas fa-phone"></i> <strong>Phone:</strong> 085020 28502</div>
-          <div><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> 085020 28502</div>
-          <div><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong><br>Basement Morija, Kanta Choraha,<br>Laxmi Nagar III, Jagannath Puri,<br>Suraj Nagar, Jhotwara, Jaipur,<br>Rajasthan 302012</div>
+        <div class="contact-info reveal">
+          <div><i class="fas fa-phone"></i> <div><strong>Phone:</strong><br>085020 28502</div></div>
+          <div><i class="fab fa-whatsapp"></i> <div><strong>WhatsApp:</strong><br>085020 28502</div></div>
+          <div><i class="fas fa-map-marker-alt"></i> <div><strong>Address:</strong><br>Basement Morija, Kanta Choraha,<br>Laxmi Nagar III, Jagannath Puri,<br>Suraj Nagar, Jhotwara, Jaipur,<br>Rajasthan 302012</div></div>
         </div>
-        <div>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.0!2d75.7!3d26.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzAwLjAiTiA3NcKwNDInMDAuMCJF!5e0!3m2!1sen!2sin!4v1" width="100%" height="280" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy"></iframe>
+        <div class="reveal">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.0!2d75.7!3d26.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzAwLjAiTiA3NcKwNDInMDAuMCJF!5e0!3m2!1sen!2sin!4v1" width="100%" height="300" style="border:0; border-radius:16px;" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
     </div>
@@ -303,12 +337,57 @@
     </div>
   </footer>
 
-  <a href="https://wa.me/918502028502" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://wa.me/918502028502" class="whatsapp-float" target="_blank" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
   <script>
+    // Mobile menu
     document.querySelector('.menu-toggle').addEventListener('click', function() {
       document.getElementById('menu').classList.toggle('active');
     });
+
+    // Scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    function checkReveal() {
+      reveals.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const elementVisible = 100;
+        if (elementTop < windowHeight - elementVisible) {
+          el.classList.add('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkReveal);
+    checkReveal();
+
+    // Animated counters
+    const counters = document.querySelectorAll('.stat-number');
+    let counted = false;
+    function animateCounters() {
+      if (counted) return;
+      const statsSection = document.querySelector('.stats');
+      const rect = statsSection.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        counted = true;
+        counters.forEach(counter => {
+          const target = +counter.getAttribute('data-target');
+          const duration = 2000;
+          const increment = target / (duration / 16);
+          let current = 0;
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              counter.textContent = target + (target === 100 ? '' : '');
+              clearInterval(timer);
+            } else {
+              counter.textContent = Math.floor(current);
+            }
+          }, 16);
+        });
+      }
+    }
+    window.addEventListener('scroll', animateCounters);
+    animateCounters();
   </script>
 </body>
 </html>
