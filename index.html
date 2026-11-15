@@ -49,6 +49,9 @@
     .cta { background: #1e40af; color: white; text-align: center; padding: 70px 0; }
     .cta h2 { font-size: 34px; margin-bottom: 12px; }
     footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px 0; }
+    .faculty-section { background: #fff; }
+    .faculty-grid { display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: center; margin-top: 30px; }
+    .faculty-card { background: #f8fafc; padding: 30px; border-radius: 16px; margin-bottom: 40px; }
     @media (max-width: 768px) {
       nav ul { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; gap: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
       nav ul.active { display: flex; }
@@ -67,6 +70,7 @@
         <ul id="menu">
           <li><a href="#home">Home</a></li>
           <li><a href="#why">Why Us</a></li>
+          <li><a href="#faculty">Faculty</a></li>
           <li><a href="#courses">Courses</a></li>
           <li><a href="#testimonials">Results</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -98,28 +102,53 @@
       </div>
     </div>
   </section>
-  <section style="background:#fff;">
+  <section class="faculty-section" id="faculty">
     <div class="container">
-      <h2 class="section-title">Meet Our Founder</h2>
-      <p class="section-subtitle">Expert English Faculty with 9+ Years Experience</p>
-      <div class="faculty-grid" style="display:grid; grid-template-columns: 280px 1fr; gap:40px; align-items:center; margin-top:30px;">
-        <div style="text-align:center;">
-          <img src="faculty.jpg" alt="Manjeet Singh Chauhan" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.15);">
-          <h3 style="margin-top:16px; color:#1d4ed8;">Manjeet Singh Chauhan</h3>
-          <p style="color:#64748b; font-size:15px;">Founder & English Grammar Faculty</p>
+      <h2 class="section-title">Our Expert Faculty</h2>
+      <p class="section-subtitle">Learn from experienced mentors</p>
+      <div class="faculty-card">
+        <div class="faculty-grid">
+          <div style="text-align:center;">
+            <img src="faculty.jpg" alt="Manjeet Singh Chauhan" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.15);">
+            <h3 style="margin-top:16px; color:#1d4ed8;">Manjeet Singh Chauhan</h3>
+            <p style="color:#64748b; font-size:15px;">Founder & English Grammar Faculty</p>
+            <p style="color:#ea580c; font-weight:600; margin-top:6px;">9+ Years Experience</p>
+          </div>
+          <div>
+            <p style="margin-bottom:14px;"><strong>Manjeet Singh Chauhan</strong> is an experienced English Grammar Faculty and the Founder of SECTOR SSC Classes, with over <strong>9+ years</strong> of dedicated teaching experience in competitive examination preparation.</p>
+            <p style="margin-bottom:14px;">With a strong command of English Grammar and Vocabulary, he has guided numerous aspirants towards success in SSC, Railway, NDA and XY Group examinations.</p>
+            <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-top:16px;">
+              <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
+              <ul style="margin:8px 0 0 18px; color:#334155;">
+                <li>English Grammar & Vocabulary</li>
+                <li>SSC CGL, CHSL, CPO, Stenographer</li>
+                <li>Railway, NDA & XY Group</li>
+                <li>PYQs, Practice Sheets & Regular Tests</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div>
-          <p style="margin-bottom:14px;"><strong>Manjeet Singh Chauhan</strong> is an experienced English Grammar Faculty and the Founder of SECTOR SSC Classes, with over <strong>9+ years</strong> of dedicated teaching experience in competitive examination preparation.</p>
-          <p style="margin-bottom:14px;">With a strong command of English Grammar and Vocabulary, he has guided numerous aspirants towards success in SSC, Railway, NDA and XY Group examinations.</p>
-          <p style="margin-bottom:14px;">His teaching approach focuses on building a strong foundation in English, simplifying complex grammatical concepts and helping students develop confidence to solve examination-level questions accurately.</p>
-          <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-top:16px;">
-            <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
-            <ul style="margin:8px 0 0 18px; color:#334155;">
-              <li>English Grammar & Vocabulary</li>
-              <li>SSC CGL, CHSL, CPO, Stenographer</li>
-              <li>Railway, NDA & XY Group</li>
-              <li>PYQs, Practice Sheets & Regular Tests</li>
-            </ul>
+      </div>
+      <div class="faculty-card">
+        <div class="faculty-grid">
+          <div style="text-align:center;">
+            <img src="pradeep.jpg" alt="Pradeep Singh Rathore" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.15);">
+            <h3 style="margin-top:16px; color:#1d4ed8;">Pradeep Singh Rathore</h3>
+            <p style="color:#64748b; font-size:15px;">Senior Mathematics Faculty</p>
+            <p style="color:#ea580c; font-weight:600; margin-top:6px;">14+ Years Experience</p>
+          </div>
+          <div>
+            <p style="margin-bottom:14px;"><strong>Pradeep Singh Rathore</strong> is an experienced Mathematics Faculty at SECTOR SSC Classes, bringing over <strong>14 years</strong> of excellence in teaching Mathematics for competitive examinations.</p>
+            <p style="margin-bottom:14px;">Known for his strong mathematical concepts, exceptional teaching methodology and student-friendly approach, Pradeep Sir has helped countless aspirants develop confidence and accuracy in Mathematics.</p>
+            <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-top:16px;">
+              <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
+              <ul style="margin:8px 0 0 18px; color:#334155;">
+                <li>Advanced Mathematics: Arithmetic, Algebra, Geometry</li>
+                <li>Quantitative Aptitude & Shortcut Techniques</li>
+                <li>SSC CGL, CHSL, CPO, Railway, NDA</li>
+                <li>Calculation Skills & Time Management</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
