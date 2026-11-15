@@ -25,7 +25,7 @@
     nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #1d4ed8; transition: 0.3s; }
     nav a:hover::after { width: 100%; }
     nav a:hover { color: #1d4ed8; }
-    .btn { background: linear-gradient(135deg, #ea580c, #f97316); color: white; padding: 12px 28px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(234,88,12,0.3); }
+    .btn { background: linear-gradient(135deg, #ea580c, #f97316); color: white; padding: 12px 28px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(234,88,12,0.3); border: none; cursor: pointer; font-size: 16px; }
     .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px rgba(234,88,12,0.4); }
     .menu-toggle { display: none; font-size: 26px; cursor: pointer; }
     .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 40%, #1d4ed8 100%); color: white; padding: 140px 0 120px; text-align: center; position: relative; overflow: hidden; }
@@ -81,6 +81,13 @@
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
     .contact-info div { margin-bottom: 20px; font-size: 17px; display: flex; align-items: flex-start; }
     .contact-info i { color: #1d4ed8; margin-right: 14px; width: 24px; font-size: 20px; margin-top: 2px; }
+    .enquiry { background: #f8fafc; }
+    .enquiry-form { background: white; padding: 35px; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: #334155; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; font-family: inherit; transition: 0.3s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #1d4ed8; }
+    .form-group textarea { min-height: 100px; resize: vertical; }
     .cta { background: linear-gradient(135deg, #ea580c, #f97316); color: white; text-align: center; padding: 90px 0; position: relative; overflow: hidden; }
     .cta::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: rgba(255,255,255,0.1); border-radius: 50%; }
     .cta h2 { font-size: 40px; margin-bottom: 14px; position: relative; }
@@ -115,11 +122,11 @@
           <li><a href="#why">Why Us</a></li>
           <li><a href="#faculty">Faculty</a></li>
           <li><a href="#courses">Courses</a></li>
-          <li><a href="#testimonials">Results</a></li>
+          <li><a href="#enquiry">Enquire</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <a href="#contact" class="btn">Join Now</a>
+      <a href="#enquiry" class="btn">Join Now</a>
       <div class="menu-toggle" onclick="document.getElementById('menu').classList.toggle('active')">☰</div>
     </div>
   </header>
@@ -186,7 +193,7 @@
             <p style="color:#ea580c; font-weight:600; margin-top:6px;">9+ Years Experience</p>
           </div>
           <div>
-            <p style="margin-bottom:14px;"><strong>Manjeet Singh Chauhan</strong> is an experienced English Grammar Faculty and the Founder of SECTOR SSC Classes, with over <strong>9+ years</strong> of dedicated teaching experience in competitive examination preparation.</p>
+            <p style="margin-bottom:14px;"><strong>Manjeet Singh Chauhan</strong> is an experienced English Grammar Faculty and the Founder of SECTOR SSC Classes, with over <strong>9+ years</strong> of dedicated teaching experience.</p>
             <p style="margin-bottom:14px;">With a strong command of English Grammar and Vocabulary, he has guided numerous aspirants towards success in SSC, Railway, NDA and XY Group examinations.</p>
             <div style="background:#f1f5f9; padding:18px; border-radius:12px; margin-top:16px;">
               <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
@@ -209,8 +216,8 @@
             <p style="color:#ea580c; font-weight:600; margin-top:6px;">14+ Years Experience</p>
           </div>
           <div>
-            <p style="margin-bottom:14px;"><strong>Pradeep Singh Rathore</strong> is an experienced Mathematics Faculty at SECTOR SSC Classes, bringing over <strong>14 years</strong> of excellence in teaching Mathematics for competitive examinations.</p>
-            <p style="margin-bottom:14px;">Known for his strong mathematical concepts, exceptional teaching methodology and student-friendly approach, Pradeep Sir has helped countless aspirants develop confidence and accuracy in Mathematics.</p>
+            <p style="margin-bottom:14px;"><strong>Pradeep Singh Rathore</strong> is an experienced Mathematics Faculty at SECTOR SSC Classes, bringing over <strong>14 years</strong> of excellence in teaching Mathematics.</p>
+            <p style="margin-bottom:14px;">Known for his strong mathematical concepts and student-friendly approach, Pradeep Sir has helped countless aspirants develop confidence in Mathematics.</p>
             <div style="background:#f1f5f9; padding:18px; border-radius:12px; margin-top:16px;">
               <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
               <ul style="margin:10px 0 0 18px; color:#334155;">
@@ -232,8 +239,8 @@
             <p style="color:#ea580c; font-weight:600; margin-top:6px;">12+ Years Experience</p>
           </div>
           <div>
-            <p style="margin-bottom:14px;"><strong>Vinit Mangal Sir</strong> is an experienced Reasoning Faculty at SECTOR SSC Classes, with over <strong>12 years</strong> of dedicated teaching experience in competitive examination preparation.</p>
-            <p style="margin-bottom:14px;">Renowned for his excellent teaching methodology, logical approach and ability to simplify complex reasoning concepts, Vinit Sir has helped numerous aspirants strengthen their analytical thinking.</p>
+            <p style="margin-bottom:14px;"><strong>Vinit Mangal Sir</strong> is an experienced Reasoning Faculty at SECTOR SSC Classes, with over <strong>12 years</strong> of dedicated teaching experience.</p>
+            <p style="margin-bottom:14px;">Renowned for his excellent teaching methodology and ability to simplify complex reasoning concepts.</p>
             <div style="background:#f1f5f9; padding:18px; border-radius:12px; margin-top:16px;">
               <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
               <ul style="margin:10px 0 0 18px; color:#334155;">
@@ -254,13 +261,13 @@
       <h2 class="section-title reveal">Our Courses</h2>
       <p class="section-subtitle reveal">Complete preparation for all competitive exams</p>
       <div class="course-grid">
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);">SSC CGL</div><div class="course-body"><p>Complete coverage of Tier 1 & Tier 2 with mock tests, notes and personal guidance.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#ea580c,#f97316);">SSC CHSL</div><div class="course-body"><p>Focused preparation for CHSL with regular practice, tests and doubt sessions.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">SSC MTS & GD</div><div class="course-body"><p>Special batches for MTS and GD with concept clarity, practice and tests.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">Railway</div><div class="course-body"><p>Complete preparation for RRB NTPC, Group D, ALP and other Railway exams.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#be185d,#ec4899);">Stenographer</div><div class="course-body"><p>Special batches for SSC Stenographer with English, GK and shorthand guidance.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#0e7490,#06b6d4);">Delhi Police</div><div class="course-body"><p>Focused preparation for Delhi Police Constable and Head Constable exams.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#b45309,#f59e0b);">CET</div><div class="course-body"><p>Common Eligibility Test preparation with complete syllabus coverage and tests.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);">SSC CGL</div><div class="course-body"><p>Complete coverage of Tier 1 & Tier 2 with mock tests, notes and personal guidance.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#ea580c,#f97316);">SSC CHSL</div><div class="course-body"><p>Focused preparation for CHSL with regular practice, tests and doubt sessions.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">SSC MTS & GD</div><div class="course-body"><p>Special batches for MTS and GD with concept clarity, practice and tests.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">Railway</div><div class="course-body"><p>Complete preparation for RRB NTPC, Group D, ALP and other Railway exams.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#be185d,#ec4899);">Stenographer</div><div class="course-body"><p>Special batches for SSC Stenographer with English, GK and shorthand guidance.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#0e7490,#06b6d4);">Delhi Police</div><div class="course-body"><p>Focused preparation for Delhi Police Constable and Head Constable exams.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire Now</a></div></div>
+        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#b45309,#f59e0b);">CET</div><div class="course-body"><p>Common Eligibility Test preparation with complete syllabus coverage and tests.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire Now</a></div></div>
       </div>
     </div>
   </section>
@@ -280,8 +287,54 @@
   <section class="cta">
     <div class="container">
       <h2>Start Your SSC Preparation Today</h2>
-      <p>Limited seats available. Call or WhatsApp now for admission details.</p>
-      <a href="https://wa.me/918502028502" class="btn" target="_blank" style="background:#25d366; margin-top:20px; font-size:16px;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+      <p>Limited seats available. Fill the form or WhatsApp now.</p>
+      <a href="#enquiry" class="btn" style="background:#25d366; margin-top:20px; font-size:16px;">Enquire Now</a>
+    </div>
+  </section>
+
+  <section class="enquiry" id="enquiry">
+    <div class="container">
+      <h2 class="section-title reveal">Enquire Now</h2>
+      <p class="section-subtitle reveal">Fill the form and we will contact you shortly</p>
+      <div style="max-width: 550px; margin: 0 auto;">
+        <form class="enquiry-form reveal" action="https://formsubmit.co/manjeetchauhan0144@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New Enquiry - Sector SSC Classes">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://sector-ssc-classes.vercel.app?submitted=1">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" name="name" required placeholder="Enter your name">
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" name="phone" required placeholder="Enter your phone">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email">
+          </div>
+          <div class="form-group">
+            <label>Course Interested *</label>
+            <select name="course" required>
+              <option value="">Select Course</option>
+              <option value="SSC CGL">SSC CGL</option>
+              <option value="SSC CHSL">SSC CHSL</option>
+              <option value="SSC MTS & GD">SSC MTS & GD</option>
+              <option value="Railway">Railway</option>
+              <option value="Stenographer">Stenographer</option>
+              <option value="Delhi Police">Delhi Police</option>
+              <option value="CET">CET</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea name="message" placeholder="Any specific query?"></textarea>
+          </div>
+          <button type="submit" class="btn" style="width: 100%; text-align: center;">Submit Enquiry</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -333,6 +386,7 @@
     function animateCounters() {
       if (counted) return;
       const statsSection = document.querySelector('.stats');
+      if (!statsSection) return;
       const rect = statsSection.getBoundingClientRect();
       if (rect.top < window.innerHeight - 100) {
         counted = true;
