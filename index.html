@@ -88,6 +88,7 @@
     .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 16px; font-family: inherit; transition: 0.3s; }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #1d4ed8; }
     .form-group textarea { min-height: 100px; resize: vertical; }
+    .form-success { display: none; background: #dcfce7; color: #166534; padding: 20px; border-radius: 12px; text-align: center; margin-top: 16px; font-weight: 600; }
     .cta { background: linear-gradient(135deg, #ea580c, #f97316); color: white; text-align: center; padding: 90px 0; position: relative; overflow: hidden; }
     .cta::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: rgba(255,255,255,0.1); border-radius: 50%; }
     .cta h2 { font-size: 40px; margin-bottom: 14px; position: relative; }
@@ -297,26 +298,22 @@
       <h2 class="section-title reveal">Enquire Now</h2>
       <p class="section-subtitle reveal">Fill the form and we will contact you shortly</p>
       <div style="max-width: 550px; margin: 0 auto;">
-        <form class="enquiry-form reveal" action="https://formsubmit.co/manjeetchauhan0144@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New Enquiry - Sector SSC Classes">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://sector-ssc-classes.vercel.app?submitted=1">
+        <form class="enquiry-form reveal" id="enquiryForm">
           <div class="form-group">
             <label>Full Name *</label>
-            <input type="text" name="name" required placeholder="Enter your name">
+            <input type="text" name="name" id="name" required placeholder="Enter your name">
           </div>
           <div class="form-group">
             <label>Phone Number *</label>
-            <input type="tel" name="phone" required placeholder="Enter your phone">
+            <input type="tel" name="phone" id="phone" required placeholder="Enter your phone">
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your email">
+            <input type="email" name="email" id="email" placeholder="Enter your email">
           </div>
           <div class="form-group">
             <label>Course Interested *</label>
-            <select name="course" required>
+            <select name="course" id="course" required>
               <option value="">Select Course</option>
               <option value="SSC CGL">SSC CGL</option>
               <option value="SSC CHSL">SSC CHSL</option>
@@ -330,9 +327,10 @@
           </div>
           <div class="form-group">
             <label>Message</label>
-            <textarea name="message" placeholder="Any specific query?"></textarea>
+            <textarea name="message" id="message" placeholder="Any specific query?"></textarea>
           </div>
-          <button type="submit" class="btn" style="width: 100%; text-align: center;">Submit Enquiry</button>
+          <button type="submit" class="btn" id="submitBtn" style="width: 100%; text-align: center;">Submit Enquiry</button>
+          <div class="form-success" id="formSuccess">Thank you! We will contact you soon.</div>
         </form>
       </div>
     </div>
@@ -368,6 +366,7 @@
     document.querySelector('.menu-toggle').addEventListener('click', function() {
       document.getElementById('menu').classList.toggle('active');
     });
+
     const reveals = document.querySelectorAll('.reveal');
     function checkReveal() {
       reveals.forEach(el => {
@@ -381,6 +380,7 @@
     }
     window.addEventListener('scroll', checkReveal);
     checkReveal();
+
     const counters = document.querySelectorAll('.stat-number');
     let counted = false;
     function animateCounters() {
@@ -409,6 +409,43 @@
     }
     window.addEventListener('scroll', animateCounters);
     animateCounters();
+
+    // Form submission with AJAX
+    document.getElementById('enquiryForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const success = document.getElementById('formSuccess');
+      btn.textContent = 'Submitting...';
+      btn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('name', document.getElementById('name').value);
+      formData.append('phone', document.getElementById('phone').value);
+      formData.append('email', document.getElementById('email').value);
+      formData.append('course', document.getElementById('course').value);
+      formData.append('message', document.getElementById('message').value);
+      formData.append('_subject', 'New Enquiry - Sector SSC Classes');
+      formData.append('_template', 'table');
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/manjeetchauhan0144@gmail.com', {
+          method: 'POST',
+          body: formData
+        });
+        if (response.ok) {
+          success.style.display = 'block';
+          this.reset();
+          btn.textContent = 'Submitted!';
+          setTimeout(() => { btn.textContent = 'Submit Enquiry'; btn.disabled = false; }, 3000);
+        } else {
+          throw new Error('Failed');
+        }
+      } catch (err) {
+        alert('Something went wrong. Please WhatsApp us directly.');
+        btn.textContent = 'Submit Enquiry';
+        btn.disabled = false;
+      }
+    });
   </script>
 </body>
 </html>
