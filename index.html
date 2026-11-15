@@ -67,11 +67,14 @@
     .slider-wrapper { position: relative; overflow: hidden; }
     .slider { display: flex; transition: transform 0.5s ease; }
     .slide { min-width: 100%; padding: 0 10px; }
-    .faculty-grid { display: grid; grid-template-columns: 160px 1fr; gap: 16px; align-items: center; }
-    .faculty-card { background: #fff; padding: 20px; border-radius: 16px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-    .faculty-card img { width: 100%; max-width: 140px; border-radius: 12px; }
-    .faculty-card h3 { font-size: 16px; color: #1d4ed8; margin-top: 8px; }
-    .faculty-card p { font-size: 13px; }
+    .faculty-grid { display: grid; grid-template-columns: 180px 1fr; gap: 20px; align-items: start; }
+    .faculty-card { background: #fff; padding: 24px; border-radius: 16px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .faculty-card img { width: 100%; max-width: 160px; border-radius: 12px; }
+    .faculty-card h3 { font-size: 18px; color: #1d4ed8; margin-top: 8px; }
+    .faculty-card .role { font-size: 14px; color: #ea580c; font-weight: 600; margin: 4px 0; }
+    .faculty-card p { font-size: 14px; margin-bottom: 8px; }
+    .faculty-card ul { margin: 10px 0 10px 18px; font-size: 14px; }
+    .faculty-card li { margin-bottom: 4px; }
     .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: #1d4ed8; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 18px; }
     .slider-btn.prev { left: 5px; }
     .slider-btn.next { right: 5px; }
@@ -207,40 +210,97 @@
           <div class="slide">
             <div class="faculty-card">
               <div class="faculty-grid">
-                <div style="text-align:center;"><img src="faculty.jpg" alt="Manjeet"><h3>Manjeet Singh Chauhan</h3><p>Founder & English</p><p style="color:#ea580c;font-weight:600;">9+ Years</p></div>
-                <div><p><strong>Manjeet Sir</strong> - Founder with 9+ years experience. Expert in English Grammar & Vocabulary for SSC, Railway, NDA.</p></div>
+                <div style="text-align:center;"><img src="faculty.jpg" alt="Manjeet Singh Chauhan"><h3>Manjeet Singh Chauhan</h3><p class="role">Founder & English Grammar Faculty</p><p style="color:#ea580c;font-weight:700;">9+ Years</p></div>
+                <div>
+                  <p><strong>Manjeet Singh Chauhan</strong> is an experienced English Grammar Faculty and the Founder of SECTOR SSC Classes, with over 9 years of dedicated teaching experience in competitive examination preparation.</p>
+                  <p>With a strong command of English Grammar and Vocabulary, he has guided numerous aspirants towards success in various competitive examinations, including SSC, Railway, NDA and XY Group examinations.</p>
+                  <p><strong>Areas of Expertise:</strong></p>
+                  <ul>
+                    <li>English Grammar: Concept-based teaching, advanced grammar rules, error detection, sentence improvement</li>
+                    <li>Vocabulary Development: Synonyms, Antonyms, One Word Substitution, Idioms & Phrases</li>
+                    <li>Competitive English: SSC CGL, CHSL, CPO, Stenographer, Railway, NDA and XY Group</li>
+                    <li>Exam-Oriented Preparation: PYQs, practice sheets, regular tests</li>
+                  </ul>
+                  <p><em>"English is not difficult when concepts are clear."</em></p>
+                </div>
               </div>
             </div>
           </div>
           <div class="slide">
             <div class="faculty-card">
               <div class="faculty-grid">
-                <div style="text-align:center;"><img src="pradeep.jpg" alt="Pradeep"><h3>Pradeep Singh Rathore</h3><p>Founder & Mathematics Faculty</p><p style="color:#ea580c;font-weight:600;">14+ Years</p></div>
-                <div><p><strong>Pradeep Sir</strong> - Founder with 14+ years in Mathematics. Makes complex concepts simple with shortcuts.</p></div>
+                <div style="text-align:center;"><img src="pradeep.jpg" alt="Pradeep Singh Rathore"><h3>Pradeep Singh Rathore</h3><p class="role">Founder & Mathematics Faculty</p><p style="color:#ea580c;font-weight:700;">14+ Years</p></div>
+                <div>
+                  <p><strong>Pradeep Singh Rathore</strong> is an experienced Mathematics Faculty at SECTOR SSC Classes, bringing over 14 years of excellence in teaching Mathematics for competitive examinations.</p>
+                  <p>Known for his strong mathematical concepts, exceptional teaching methodology and student-friendly approach, Pradeep Sir has helped countless aspirants develop confidence and accuracy in Mathematics.</p>
+                  <p><strong>Areas of Expertise:</strong></p>
+                  <ul>
+                    <li>Advanced Mathematics: Arithmetic, Algebra, Geometry, Trigonometry and Mensuration</li>
+                    <li>Quantitative Aptitude: Conceptual clarity, shortcut techniques and exam-oriented problem solving</li>
+                    <li>Calculation Skills: Fast calculations, accuracy improvement and time management</li>
+                    <li>Competitive Mathematics: SSC CGL, CHSL, CPO, Railway, NDA</li>
+                  </ul>
+                  <p>His teaching methodology combines strong conceptual foundation, easy-to-understand explanations, smart calculation techniques and extensive question practice.</p>
+                </div>
               </div>
             </div>
           </div>
           <div class="slide">
             <div class="faculty-card">
               <div class="faculty-grid">
-                <div style="text-align:center;"><img src="vinit.jpg" alt="Vinit"><h3>Vinit Mangal</h3><p>Reasoning Faculty</p><p style="color:#ea580c;font-weight:600;">12+ Years</p></div>
-                <div><p><strong>Vinit Sir</strong> - 12+ years in Reasoning. Develops logical thinking and problem-solving.</p></div>
+                <div style="text-align:center;"><img src="vinit.jpg" alt="Vinit Mangal"><h3>Vinit Mangal</h3><p class="role">Senior Reasoning Faculty</p><p style="color:#ea580c;font-weight:700;">12+ Years</p></div>
+                <div>
+                  <p><strong>Vinit Mangal Sir</strong> is an experienced Reasoning Faculty at SECTOR SSC Classes, with over 12 years of dedicated teaching experience in competitive examination preparation.</p>
+                  <p>Renowned for his excellent teaching methodology, logical approach and ability to simplify complex reasoning concepts, Vinit Sir has helped numerous aspirants strengthen their analytical thinking and problem-solving abilities.</p>
+                  <p><strong>Areas of Expertise:</strong></p>
+                  <ul>
+                    <li>Verbal Reasoning: Analogy, Classification, Series, Coding-Decoding, Blood Relations, Direction Sense</li>
+                    <li>Non-Verbal Reasoning: Figure Series, Mirror Images, Water Images, Paper Folding</li>
+                    <li>Advanced Reasoning: Seating Arrangement, Puzzles, Syllogism, Inequality</li>
+                    <li>Competitive Examinations: SSC CGL, CHSL, CPO, Railway, NDA</li>
+                  </ul>
+                  <p>His teaching focuses on building strong logical fundamentals, simplifying difficult questions, and improving speed and accuracy.</p>
+                </div>
               </div>
             </div>
           </div>
           <div class="slide">
             <div class="faculty-card">
               <div class="faculty-grid">
-                <div style="text-align:center;"><img src="balveer.jpg" alt="Balveer Sir"><h3>Balveer Sir</h3><p>General Knowledge Faculty</p><p style="color:#ea580c;font-weight:600;">17+ Years</p></div>
-                <div><p><strong>Balveer Sir</strong> is an experienced General Knowledge Faculty with <strong>17+ years</strong> of teaching experience. Expert in History, Geography, Polity, Science & Current Affairs.</p></div>
+                <div style="text-align:center;"><img src="balveer.jpg" alt="Balveer Sir"><h3>Balveer Sir</h3><p class="role">Senior General Knowledge Faculty</p><p style="color:#ea580c;font-weight:700;">17+ Years</p></div>
+                <div>
+                  <p><strong>Balveer Sir</strong> is an experienced General Knowledge Faculty at SECTOR SSC Classes, with over 17 years of dedicated teaching experience in competitive examination preparation.</p>
+                  <p>Known for his extensive subject knowledge, engaging teaching style and excellent explanation skills, Balveer Sir has guided numerous aspirants in developing a strong foundation in General Knowledge and General Awareness.</p>
+                  <p><strong>Areas of Expertise:</strong></p>
+                  <ul>
+                    <li>Indian History: Ancient, Medieval and Modern Indian History</li>
+                    <li>Indian Geography: Physical, Indian and World Geography</li>
+                    <li>Indian Polity: Constitution, Governance, Fundamental Rights</li>
+                    <li>General Science, Indian Economy & Current Affairs</li>
+                    <li>Competitive GK: SSC, Railway, NDA, XY Group</li>
+                  </ul>
+                  <p>His teaching methodology focuses on making complex factual information easy to understand, remember and revise.</p>
+                </div>
               </div>
             </div>
           </div>
           <div class="slide">
             <div class="faculty-card">
               <div class="faculty-grid">
-                <div style="text-align:center;"><img src="gautam.jpg" alt="Gautam Sir"><h3>Gautam Sir</h3><p>Political Science & Polity</p><p style="color:#ea580c;font-weight:600;">8+ Years</p></div>
-                <div><p><strong>Gautam Sir</strong> specializes in Indian Polity & Political Science with <strong>8+ years</strong> of experience. Expert in Constitution and Governance.</p></div>
+                <div style="text-align:center;"><img src="gautam.jpg" alt="Gautam Sir"><h3>Gautam Sir</h3><p class="role">Political Science & Indian Polity Faculty</p><p style="color:#ea580c;font-weight:700;">8+ Years</p></div>
+                <div>
+                  <p><strong>Gautam Sir</strong> is an experienced faculty specializing in Political Science and Indian Polity at SECTOR SSC Classes, with over 8 years of teaching experience.</p>
+                  <p>He believes that Political Science and Indian Polity should be understood through concepts rather than memorized facts.</p>
+                  <p><strong>Areas of Expertise:</strong></p>
+                  <ul>
+                    <li>Indian Constitution: Fundamental Rights, Duties, Directive Principles, Amendments</li>
+                    <li>Parliament, Judiciary, Federalism and Constitutional Bodies</li>
+                    <li>Political Science: Political Concepts, Theories, Democracy and Governance</li>
+                    <li>Indian Governance: Government Structure, Administrative System</li>
+                    <li>General Studies & Competitive Examination Preparation</li>
+                  </ul>
+                  <p>His teaching methodology emphasizes building strong conceptual foundations and connecting theoretical concepts with practical examples.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -396,7 +456,7 @@
       if (facultyIndex >= facultySlides.length) facultyIndex = 0;
       document.getElementById('facultySlider').style.transform = 'translateX(-' + (facultyIndex * 100) + '%)';
     }
-    setInterval(() => moveFaculty(1), 5000);
+    setInterval(() => moveFaculty(1), 6000);
     let testIndex = 0;
     const testSlides = document.querySelectorAll('#testimonialSlider .slide');
     function moveTestimonial(dir) {
