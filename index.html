@@ -12,120 +12,166 @@
     body { font-family: 'Poppins', system-ui, sans-serif; color: #1e293b; line-height: 1.6; overflow-x: hidden; background: #fff; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
     a { text-decoration: none; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+    /* Enhanced Animations */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(70px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(3deg); } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
     @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); } 50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.8); } }
-    .reveal { opacity: 0; transform: translateY(50px); transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    @keyframes glow { 0%, 100% { text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); } 50% { text-shadow: 0 0 30px rgba(251, 191, 36, 0.9), 0 0 50px rgba(251, 191, 36, 0.5); } }
+    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+    @keyframes bounceIn { 0% { opacity: 0; transform: scale(0.3); } 50% { transform: scale(1.05); } 70% { transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+    .reveal { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #ea580c, #fbbf24); width: 0%; z-index: 9999; }
-    header { background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); box-shadow: 0 4px 30px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; }
+    .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal-left.active { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(50px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal-right.active { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.8); transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal-scale.active { opacity: 1; transform: scale(1); }
+    .delay-1 { transition-delay: 0.15s; }
+    .delay-2 { transition-delay: 0.3s; }
+    .delay-3 { transition-delay: 0.45s; }
+
+    .progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #ea580c, #fbbf24, #ea580c); background-size: 200% 100%; animation: gradientMove 3s linear infinite; width: 0%; z-index: 9999; }
+
+    header { background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); box-shadow: 0 4px 30px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 1000; }
     .nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; position: relative; }
-    .logo { font-size: 24px; font-weight: 800; color: #1d4ed8; }
+    .logo { font-size: 26px; font-weight: 800; color: #1d4ed8; animation: glow 4s ease-in-out infinite; }
     .logo span { color: #ea580c; }
-    nav ul { display: flex; list-style: none; gap: 28px; }
-    nav a { color: #334155; font-weight: 600; transition: 0.3s; }
+    nav ul { display: flex; list-style: none; gap: 30px; }
+    nav a { color: #334155; font-weight: 600; transition: 0.3s; position: relative; }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, #1d4ed8, #ea580c); transition: 0.4s; }
+    nav a:hover::after { width: 100%; }
     nav a:hover { color: #1d4ed8; }
-    .btn { background: linear-gradient(135deg, #ea580c, #f97316); color: white; padding: 12px 24px; border-radius: 50px; font-weight: 700; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(234,88,12,0.3); border: none; cursor: pointer; font-size: 15px; }
-    .btn:hover { transform: translateY(-3px); }
-    .menu-toggle { display: none; font-size: 28px; cursor: pointer; padding: 8px; background: none; border: none; color: #1d4ed8; }
-    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%); color: white; padding: 140px 0 100px; text-align: center; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(251,191,36,0.12) 0%, transparent 60%); animation: rotate 25s linear infinite; }
-    .floating-shapes { position: absolute; width: 100%; height: 100%; top: 0; left: 0; overflow: hidden; z-index: 1; }
-    .shape { position: absolute; background: rgba(255,255,255,0.07); border-radius: 50%; animation: float 6s ease-in-out infinite; }
-    .shape:nth-child(1) { width: 70px; height: 70px; top: 15%; left: 8%; }
-    .shape:nth-child(2) { width: 100px; height: 100px; top: 55%; left: 75%; animation-delay: 2s; }
-    .shape:nth-child(3) { width: 50px; height: 50px; top: 35%; left: 65%; animation-delay: 4s; }
-    .hero-content { position: relative; z-index: 2; }
-    .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 16px; line-height: 1.15; }
-    .hero h1 span { color: #fbbf24; }
-    .hero p { font-size: 18px; margin-bottom: 32px; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; }
-    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-outline { background: transparent; border: 2px solid white; color: white; }
+
+    .btn { background: linear-gradient(135deg, #ea580c, #f97316); background-size: 200% 200%; animation: gradientMove 4s ease infinite; color: white; padding: 14px 28px; border-radius: 50px; font-weight: 700; display: inline-block; transition: 0.4s; box-shadow: 0 6px 20px rgba(234,88,12,0.3); border: none; cursor: pointer; font-size: 15px; position: relative; overflow: hidden; }
+    .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: 0.6s; }
+    .btn:hover::before { left: 100%; }
+    .btn:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 12px 30px rgba(234,88,12,0.45); }
+    .btn-outline { background: transparent; border: 2px solid white; color: white; animation: none; }
     .btn-outline:hover { background: white; color: #1d4ed8; }
-    .badge { display: inline-block; background: rgba(255,255,255,0.15); padding: 8px 18px; border-radius: 50px; font-size: 13px; margin-bottom: 20px; }
-    .stats { background: #fff; padding: 0 0 50px; margin-top: -40px; position: relative; z-index: 10; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; background: white; border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.1); padding: 30px 20px; }
-    .stat { text-align: center; }
-    .stat-number { font-size: 42px; font-weight: 800; background: linear-gradient(135deg, #1d4ed8, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .stat-label { color: #64748b; font-size: 13px; margin-top: 6px; font-weight: 600; }
-    section { padding: 70px 0; }
-    .section-title { text-align: center; font-size: 32px; margin-bottom: 12px; color: #0f172a; font-weight: 800; }
-    .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: linear-gradient(90deg, #ea580c, #fbbf24); margin: 10px auto 0; border-radius: 2px; }
-    .section-subtitle { text-align: center; color: #64748b; margin-bottom: 40px; font-size: 16px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .card { background: white; padding: 30px 20px; border-radius: 20px; box-shadow: 0 6px 25px rgba(0,0,0,0.06); text-align: center; transition: 0.4s; }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
-    .card i { font-size: 40px; color: #1d4ed8; margin-bottom: 14px; }
-    .card h3 { margin-bottom: 8px; color: #0f172a; font-size: 18px; }
+    .menu-toggle { display: none; font-size: 28px; cursor: pointer; padding: 8px; background: none; border: none; color: #1d4ed8; }
+
+    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 40%, #1d4ed8 100%); background-size: 200% 200%; animation: gradientMove 15s ease infinite; color: white; padding: 150px 0 110px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(251,191,36,0.15) 0%, transparent 50%); animation: rotate 30s linear infinite; }
+    .floating-shapes { position: absolute; width: 100%; height: 100%; top: 0; left: 0; overflow: hidden; z-index: 1; pointer-events: none; }
+    .shape { position: absolute; background: rgba(255,255,255,0.08); border-radius: 50%; animation: float 7s ease-in-out infinite; }
+    .shape:nth-child(1) { width: 80px; height: 80px; top: 18%; left: 10%; animation-delay: 0s; }
+    .shape:nth-child(2) { width: 120px; height: 120px; top: 60%; left: 78%; animation-delay: 2s; }
+    .shape:nth-child(3) { width: 60px; height: 60px; top: 40%; left: 68%; animation-delay: 4s; }
+    .shape:nth-child(4) { width: 40px; height: 40px; top: 75%; left: 20%; animation-delay: 1s; }
+    .hero-content { position: relative; z-index: 2; }
+    .hero h1 { font-size: 56px; font-weight: 800; margin-bottom: 18px; line-height: 1.1; animation: fadeInUp 1s ease; }
+    .hero h1 span { color: #fbbf24; display: inline-block; animation: glow 2.5s ease-in-out infinite; }
+    .hero p { font-size: 19px; margin-bottom: 36px; opacity: 0.95; max-width: 720px; margin-left: auto; margin-right: auto; animation: fadeInUp 1.2s ease 0.2s both; }
+    .hero-buttons { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; animation: fadeInUp 1.4s ease 0.4s both; }
+    .badge { display: inline-block; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 10px 20px; border-radius: 50px; font-size: 14px; margin-bottom: 22px; animation: bounceIn 0.8s ease, pulse 3s ease-in-out 1s infinite; border: 1px solid rgba(255,255,255,0.25); }
+
+    .stats { background: #fff; padding: 0 0 60px; margin-top: -50px; position: relative; z-index: 10; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); padding: 40px 25px; }
+    .stat { text-align: center; transition: 0.4s; }
+    .stat:hover { transform: translateY(-10px) scale(1.05); }
+    .stat-number { font-size: 48px; font-weight: 800; background: linear-gradient(135deg, #1d4ed8, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-label { color: #64748b; font-size: 14px; margin-top: 8px; font-weight: 600; }
+
+    section { padding: 80px 0; }
+    .section-title { text-align: center; font-size: 38px; margin-bottom: 14px; color: #0f172a; font-weight: 800; }
+    .section-title::after { content: ''; display: block; width: 70px; height: 4px; background: linear-gradient(90deg, #ea580c, #fbbf24); margin: 12px auto 0; border-radius: 2px; }
+    .section-subtitle { text-align: center; color: #64748b; margin-bottom: 45px; font-size: 17px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+
+    .card { background: white; padding: 35px 24px; border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.06); text-align: center; transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1); border: 1px solid #f1f5f9; position: relative; overflow: hidden; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #1d4ed8, #ea580c); transform: scaleX(0); transform-origin: left; transition: 0.5s; }
+    .card:hover::before { transform: scaleX(1); }
+    .card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px rgba(0,0,0,0.12); }
+    .card i { font-size: 46px; color: #1d4ed8; margin-bottom: 16px; transition: 0.5s; display: inline-block; }
+    .card:hover i { transform: scale(1.2) rotate(10deg); color: #ea580c; }
+    .card h3 { margin-bottom: 10px; color: #0f172a; font-size: 20px; }
+
     .process { background: linear-gradient(135deg, #f8fafc, #eff6ff); }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
     .process-step { text-align: center; }
-    .step-number { width: 60px; height: 60px; background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; margin: 0 auto 12px; }
+    .step-number { width: 70px; height: 70px; background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; margin: 0 auto 16px; box-shadow: 0 8px 25px rgba(29,78,216,0.3); transition: 0.5s; }
+    .process-step:hover .step-number { transform: scale(1.15) rotate(15deg); box-shadow: 0 12px 35px rgba(29,78,216,0.4); }
+
     .courses { background: #fff; }
-    .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-    .course { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.07); transition: 0.4s; }
-    .course:hover { transform: translateY(-8px); }
-    .course-header { height: 120px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: 700; }
-    .course-body { padding: 20px; }
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px; }
+    .course { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.07); transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .course:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+    .course-header { height: 130px; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: 700; position: relative; overflow: hidden; }
+    .course-header::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent); transition: 0.7s; }
+    .course:hover .course-header::after { left: 100%; }
+    .course-body { padding: 22px; }
     .price { font-size: 18px; color: #ea580c; font-weight: 700; margin: 10px 0; }
+
     .faculty-section { background: #f8fafc; }
     .faculty-grid { display: grid; grid-template-columns: 220px 1fr; gap: 30px; align-items: center; }
-    .faculty-card { background: white; padding: 30px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 6px 20px rgba(0,0,0,0.05); }
-    .testimonials { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: white; }
+    .faculty-card { background: white; padding: 32px; border-radius: 24px; margin-bottom: 28px; box-shadow: 0 8px 25px rgba(0,0,0,0.05); transition: 0.5s; }
+    .faculty-card:hover { transform: translateY(-8px); box-shadow: 0 20px 45px rgba(0,0,0,0.1); }
+    .faculty-card img { transition: 0.5s; border-radius: 16px; }
+    .faculty-card:hover img { transform: scale(1.05); }
+
+    .testimonials { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: white; position: relative; }
     .testimonials .section-title, .testimonials .section-subtitle { color: white; }
-    .testimonial { background: rgba(255,255,255,0.1); padding: 28px; border-radius: 16px; }
-    .stars { color: #fbbf24; margin-bottom: 10px; }
+    .testimonial { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); transition: 0.4s; }
+    .testimonial:hover { background: rgba(255,255,255,0.14); transform: translateY(-8px); }
+    .stars { color: #fbbf24; margin-bottom: 12px; font-size: 18px; }
+
     .contact { background: #fff; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
     .contact-info div { margin-bottom: 18px; font-size: 16px; display: flex; align-items: flex-start; }
-    .contact-info i { color: #1d4ed8; margin-right: 12px; width: 22px; font-size: 18px; }
+    .contact-info i { color: #1d4ed8; margin-right: 14px; width: 22px; font-size: 20px; }
     .enquiry { background: #f8fafc; }
-    .enquiry-form { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+    .enquiry-form { background: white; padding: 35px; border-radius: 24px; box-shadow: 0 10px 35px rgba(0,0,0,0.06); }
     .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: #334155; font-size: 14px; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-family: inherit; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #1d4ed8; }
-    .form-group textarea { min-height: 90px; resize: vertical; }
-    .form-success { display: none; background: #dcfce7; color: #166534; padding: 16px; border-radius: 12px; text-align: center; margin-top: 14px; font-weight: 600; }
-    .cta { background: linear-gradient(135deg, #ea580c, #f97316); color: white; text-align: center; padding: 70px 0; }
-    .cta h2 { font-size: 32px; margin-bottom: 12px; }
-    .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 6px 20px rgba(37,211,102,0.4); z-index: 999; }
-    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px 0; font-size: 14px; }
+    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: #334155; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; font-family: inherit; transition: 0.3s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #1d4ed8; box-shadow: 0 0 0 4px rgba(29,78,216,0.1); }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+    .form-success { display: none; background: #dcfce7; color: #166534; padding: 18px; border-radius: 12px; text-align: center; margin-top: 14px; font-weight: 600; animation: bounceIn 0.5s ease; }
+
+    .cta { background: linear-gradient(135deg, #ea580c, #f97316); background-size: 200% 200%; animation: gradientMove 8s ease infinite; color: white; text-align: center; padding: 80px 0; position: relative; overflow: hidden; }
+    .cta::before { content: ''; position: absolute; top: -40%; right: -15%; width: 400px; height: 400px; background: rgba(255,255,255,0.1); border-radius: 50%; animation: float 10s ease-in-out infinite; }
+    .cta h2 { font-size: 38px; margin-bottom: 14px; position: relative; }
+    .cta p { position: relative; }
+
+    .whatsapp-float { position: fixed; bottom: 24px; right: 24px; background: #25d366; color: white; width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 8px 25px rgba(37,211,102,0.45); z-index: 999; animation: pulse 2.5s ease-in-out infinite; transition: 0.3s; }
+    .whatsapp-float:hover { transform: scale(1.15); animation: none; }
+
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 35px 0; }
     #hiddenFrame { display: none; }
+
     @media (max-width: 768px) {
       .menu-toggle { display: block; }
-      nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; gap: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 999; }
+      nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 15px; gap: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.12); z-index: 999; }
       nav ul.active { display: flex; }
       nav ul li { border-bottom: 1px solid #f1f5f9; }
-      nav ul li:last-child { border-bottom: none; }
-      nav ul a { display: block; padding: 14px 10px; font-size: 16px; }
-      .hero { padding: 100px 0 80px; }
+      nav ul a { display: block; padding: 14px 12px; }
+      .hero { padding: 110px 0 80px; }
       .hero h1 { font-size: 32px; }
       .hero p { font-size: 15px; }
-      .stats-grid { grid-template-columns: 1fr 1fr; padding: 20px 12px; gap: 12px; }
-      .stat-number { font-size: 32px; }
-      .process-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; padding: 24px 14px; }
+      .stat-number { font-size: 34px; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
       .faculty-grid { grid-template-columns: 1fr !important; text-align: center; }
       .section-title { font-size: 26px; }
-      .card { padding: 24px 16px; }
-      .btn { padding: 12px 20px; font-size: 14px; }
     }
     @media (max-width: 480px) {
       .process-grid { grid-template-columns: 1fr; }
       .hero h1 { font-size: 28px; }
-      .stats { margin-top: -30px; }
     }
   </style>
 </head>
 <body>
   <div class="progress-bar" id="progressBar"></div>
-  <header id="header">
+  <header>
     <div class="container nav">
       <div class="logo">Sector <span>SSC</span> Classes</div>
       <nav>
@@ -138,12 +184,13 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <a href="#enquiry" class="btn desktop-btn">Join Now</a>
+      <a href="#enquiry" class="btn">Join Now</a>
       <button class="menu-toggle" id="menuToggle">☰</button>
     </div>
   </header>
+
   <section class="hero" id="home">
-    <div class="floating-shapes"><div class="shape"></div><div class="shape"></div><div class="shape"></div></div>
+    <div class="floating-shapes"><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div></div>
     <div class="hero-content container">
       <div class="badge"><i class="fas fa-star"></i> Jaipur's Trusted SSC Coaching</div>
       <h1>Selection मतलब<br><span>Sector SSC</span></h1>
@@ -154,53 +201,57 @@
       </div>
     </div>
   </section>
+
   <div class="stats">
     <div class="container">
       <div class="stats-grid">
-        <div class="stat reveal"><div class="stat-number" data-target="9">0</div><div class="stat-label">Years Experience</div></div>
-        <div class="stat reveal"><div class="stat-number" data-target="500">0</div><div class="stat-label">Students Selected</div></div>
-        <div class="stat reveal"><div class="stat-number" data-target="3">0</div><div class="stat-label">Expert Faculty</div></div>
-        <div class="stat reveal"><div class="stat-number" data-target="100">0</div><div class="stat-label">% Personal Attention</div></div>
+        <div class="stat reveal-scale"><div class="stat-number" data-target="9">0</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat reveal-scale delay-1"><div class="stat-number" data-target="500">0</div><div class="stat-label">Students Selected</div></div>
+        <div class="stat reveal-scale delay-2"><div class="stat-number" data-target="3">0</div><div class="stat-label">Expert Faculty</div></div>
+        <div class="stat reveal-scale delay-3"><div class="stat-number" data-target="100">0</div><div class="stat-label">% Personal Attention</div></div>
       </div>
     </div>
   </div>
+
   <section id="why">
     <div class="container">
       <h2 class="section-title reveal">Why Choose Sector SSC Classes</h2>
       <p class="section-subtitle reveal">Focused preparation with personal attention</p>
       <div class="grid">
         <div class="card reveal"><i class="fas fa-chalkboard-teacher"></i><h3>Expert Faculty</h3><p>Experienced teachers with deep knowledge of SSC exam pattern.</p></div>
-        <div class="card reveal"><i class="fas fa-file-alt"></i><h3>Regular Mock Tests</h3><p>Weekly tests to improve speed, accuracy and time management.</p></div>
-        <div class="card reveal"><i class="fas fa-book-open"></i><h3>Study Material</h3><p>Updated notes, practice sets and previous year papers.</p></div>
-        <div class="card reveal"><i class="fas fa-users"></i><h3>Small Batches</h3><p>Personal attention and dedicated doubt clearing sessions.</p></div>
+        <div class="card reveal delay-1"><i class="fas fa-file-alt"></i><h3>Regular Mock Tests</h3><p>Weekly tests to improve speed, accuracy and time management.</p></div>
+        <div class="card reveal delay-2"><i class="fas fa-book-open"></i><h3>Study Material</h3><p>Updated notes, practice sets and previous year papers.</p></div>
+        <div class="card reveal delay-3"><i class="fas fa-users"></i><h3>Small Batches</h3><p>Personal attention and dedicated doubt clearing sessions.</p></div>
       </div>
     </div>
   </section>
+
   <section class="process">
     <div class="container">
       <h2 class="section-title reveal">How We Prepare You</h2>
       <p class="section-subtitle reveal">Simple 4-step process for your selection</p>
       <div class="process-grid">
         <div class="process-step reveal"><div class="step-number">1</div><h3>Concept Building</h3><p>Strong foundation with clear explanations.</p></div>
-        <div class="process-step reveal"><div class="step-number">2</div><h3>Practice</h3><p>Daily practice sets and topic-wise questions.</p></div>
-        <div class="process-step reveal"><div class="step-number">3</div><h3>Mock Tests</h3><p>Full-length tests in exam-like environment.</p></div>
-        <div class="process-step reveal"><div class="step-number">4</div><h3>Selection</h3><p>Revision strategy and final preparation.</p></div>
+        <div class="process-step reveal delay-1"><div class="step-number">2</div><h3>Practice</h3><p>Daily practice sets and topic-wise questions.</p></div>
+        <div class="process-step reveal delay-2"><div class="step-number">3</div><h3>Mock Tests</h3><p>Full-length tests in exam-like environment.</p></div>
+        <div class="process-step reveal delay-3"><div class="step-number">4</div><h3>Selection</h3><p>Revision strategy and final preparation.</p></div>
       </div>
     </div>
   </section>
+
   <section class="faculty-section" id="faculty">
     <div class="container">
       <h2 class="section-title reveal">Our Expert Faculty</h2>
       <p class="section-subtitle reveal">Learn from experienced mentors</p>
       <div class="faculty-card reveal">
         <div class="faculty-grid">
-          <div style="text-align:center;">
-            <img src="faculty.jpg" alt="Manjeet Singh Chauhan" style="width:100%; max-width:200px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.12);">
+          <div style="text-align:center;" class="reveal-left">
+            <img src="faculty.jpg" alt="Manjeet Singh Chauhan" style="width:100%; max-width:200px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.12);">
             <h3 style="margin-top:14px; color:#1d4ed8;">Manjeet Singh Chauhan</h3>
             <p style="color:#64748b; font-size:14px;">Founder & English Faculty</p>
             <p style="color:#ea580c; font-weight:600; margin-top:4px;">9+ Years</p>
           </div>
-          <div>
+          <div class="reveal-right">
             <p style="margin-bottom:12px;"><strong>Manjeet Singh Chauhan</strong> is the Founder of SECTOR SSC Classes with <strong>9+ years</strong> of teaching experience in competitive exams.</p>
             <p>Expert in English Grammar, Vocabulary for SSC, Railway, NDA and other exams.</p>
           </div>
@@ -208,13 +259,13 @@
       </div>
       <div class="faculty-card reveal">
         <div class="faculty-grid">
-          <div style="text-align:center;">
-            <img src="pradeep.jpg" alt="Pradeep Singh Rathore" style="width:100%; max-width:200px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.12);">
+          <div style="text-align:center;" class="reveal-left">
+            <img src="pradeep.jpg" alt="Pradeep Singh Rathore" style="width:100%; max-width:200px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.12);">
             <h3 style="margin-top:14px; color:#1d4ed8;">Pradeep Singh Rathore</h3>
             <p style="color:#64748b; font-size:14px;">Senior Mathematics Faculty</p>
             <p style="color:#ea580c; font-weight:600; margin-top:4px;">14+ Years</p>
           </div>
-          <div>
+          <div class="reveal-right">
             <p style="margin-bottom:12px;"><strong>Pradeep Singh Rathore</strong> brings <strong>14+ years</strong> of excellence in teaching Mathematics for competitive examinations.</p>
             <p>Expert in making complex concepts simple with shortcut techniques.</p>
           </div>
@@ -222,13 +273,13 @@
       </div>
       <div class="faculty-card reveal">
         <div class="faculty-grid">
-          <div style="text-align:center;">
-            <img src="vinit.jpg" alt="Vinit Mangal" style="width:100%; max-width:200px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.12);">
+          <div style="text-align:center;" class="reveal-left">
+            <img src="vinit.jpg" alt="Vinit Mangal" style="width:100%; max-width:200px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.12);">
             <h3 style="margin-top:14px; color:#1d4ed8;">Vinit Mangal</h3>
             <p style="color:#64748b; font-size:14px;">Senior Reasoning Faculty</p>
             <p style="color:#ea580c; font-weight:600; margin-top:4px;">12+ Years</p>
           </div>
-          <div>
+          <div class="reveal-right">
             <p style="margin-bottom:12px;"><strong>Vinit Mangal</strong> has <strong>12+ years</strong> of experience in teaching Reasoning for competitive exams.</p>
             <p>Expert in developing logical thinking and problem-solving skills.</p>
           </div>
@@ -236,39 +287,43 @@
       </div>
     </div>
   </section>
+
   <section class="courses" id="courses">
     <div class="container">
       <h2 class="section-title reveal">Our Courses</h2>
       <p class="section-subtitle reveal">Complete preparation for all competitive exams</p>
       <div class="course-grid">
         <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);">SSC CGL</div><div class="course-body"><p>Complete Tier 1 & Tier 2 coverage with mock tests.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#ea580c,#f97316);">SSC CHSL</div><div class="course-body"><p>Focused CHSL preparation with regular tests.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">SSC MTS & GD</div><div class="course-body"><p>Special batches for MTS and GD exams.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
+        <div class="course reveal delay-1"><div class="course-header" style="background:linear-gradient(135deg,#ea580c,#f97316);">SSC CHSL</div><div class="course-body"><p>Focused CHSL preparation with regular tests.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
+        <div class="course reveal delay-2"><div class="course-header" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">SSC MTS & GD</div><div class="course-body"><p>Special batches for MTS and GD exams.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
         <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">Railway</div><div class="course-body"><p>RRB NTPC, Group D, ALP preparation.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#be185d,#ec4899);">Stenographer</div><div class="course-body"><p>SSC Stenographer with English & GK.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
-        <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#0e7490,#06b6d4);">Delhi Police</div><div class="course-body"><p>Constable & Head Constable preparation.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
+        <div class="course reveal delay-1"><div class="course-header" style="background:linear-gradient(135deg,#be185d,#ec4899);">Stenographer</div><div class="course-body"><p>SSC Stenographer with English & GK.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
+        <div class="course reveal delay-2"><div class="course-header" style="background:linear-gradient(135deg,#0e7490,#06b6d4);">Delhi Police</div><div class="course-body"><p>Constable & Head Constable preparation.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
         <div class="course reveal"><div class="course-header" style="background:linear-gradient(135deg,#b45309,#f59e0b);">CET</div><div class="course-body"><p>Common Eligibility Test complete coverage.</p><div class="price">Contact for Fees</div><a href="#enquiry" class="btn">Enquire</a></div></div>
       </div>
     </div>
   </section>
+
   <section class="testimonials" id="testimonials">
     <div class="container">
       <h2 class="section-title reveal">Student Testimonials</h2>
       <p class="section-subtitle reveal">What our students say</p>
       <div class="grid">
-        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Teachers explain concepts very clearly. Regular mock tests helped me a lot."</p><strong style="display:block; margin-top:10px;">- Rohit Sharma</strong><small>SSC CGL Selected</small></div>
-        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Best coaching in Jhotwara. Study material is excellent."</p><strong style="display:block; margin-top:10px;">- Priya Yadav</strong><small>SSC CHSL Selected</small></div>
-        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Faculty is supportive. Cleared exam with good preparation."</p><strong style="display:block; margin-top:10px;">- Amit Kumar</strong><small>SSC GD Selected</small></div>
+        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Teachers explain concepts very clearly. Regular mock tests helped me a lot."</p><strong style="display:block; margin-top:12px;">- Rohit Sharma</strong><small>SSC CGL Selected</small></div>
+        <div class="testimonial reveal delay-1"><div class="stars">★★★★★</div><p>"Best coaching in Jhotwara. Study material is excellent."</p><strong style="display:block; margin-top:12px;">- Priya Yadav</strong><small>SSC CHSL Selected</small></div>
+        <div class="testimonial reveal delay-2"><div class="stars">★★★★★</div><p>"Faculty is supportive. Cleared exam with good preparation."</p><strong style="display:block; margin-top:12px;">- Amit Kumar</strong><small>SSC GD Selected</small></div>
       </div>
     </div>
   </section>
+
   <section class="cta">
     <div class="container">
       <h2>Start Your Preparation Today</h2>
       <p>Limited seats available. Fill the form or WhatsApp now.</p>
-      <a href="#enquiry" class="btn" style="background:#25d366; margin-top:16px;">Enquire Now</a>
+      <a href="#enquiry" class="btn" style="background:#25d366; margin-top:18px; animation:none;">Enquire Now</a>
     </div>
   </section>
+
   <section class="enquiry" id="enquiry">
     <div class="container">
       <h2 class="section-title reveal">Enquire Now</h2>
@@ -283,29 +338,32 @@
           <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="Your email"></div>
           <div class="form-group"><label>Course *</label><select name="course" required><option value="">Select</option><option value="SSC CGL">SSC CGL</option><option value="SSC CHSL">SSC CHSL</option><option value="SSC MTS & GD">SSC MTS & GD</option><option value="Railway">Railway</option><option value="Stenographer">Stenographer</option><option value="Delhi Police">Delhi Police</option><option value="CET">CET</option><option value="Other">Other</option></select></div>
           <div class="form-group"><label>Message</label><textarea name="message" placeholder="Any query?"></textarea></div>
-          <button type="submit" class="btn" id="submitBtn" style="width:100%;">Submit Enquiry</button>
+          <button type="submit" class="btn" id="submitBtn" style="width:100%; animation:none;">Submit Enquiry</button>
           <div class="form-success" id="formSuccess">Thank you! We will contact you soon.</div>
         </form>
         <iframe name="hiddenFrame" id="hiddenFrame"></iframe>
       </div>
     </div>
   </section>
+
   <section class="contact" id="contact">
     <div class="container">
       <h2 class="section-title reveal">Contact Us</h2>
       <p class="section-subtitle reveal">Visit our center or call</p>
       <div class="contact-grid">
-        <div class="contact-info reveal">
+        <div class="contact-info reveal-left">
           <div><i class="fas fa-phone"></i><div><strong>Phone:</strong><br>085020 28502</div></div>
           <div><i class="fab fa-whatsapp"></i><div><strong>WhatsApp:</strong><br>085020 28502</div></div>
           <div><i class="fas fa-map-marker-alt"></i><div><strong>Address:</strong><br>Ground Floor Morija House, Kanta Choraha,<br>Laxmi Nagar III, Jagannath Puri,<br>Suraj Nagar, Jhotwara, Jaipur,<br>Rajasthan 302012</div></div>
         </div>
-        <div class="reveal"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.0!2d75.7!3d26.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzAwLjAiTiA3NcKwNDInMDAuMCJF!5e0!3m2!1sen!2sin!4v1" width="100%" height="250" style="border:0; border-radius:16px;" allowfullscreen loading="lazy"></iframe></div>
+        <div class="reveal-right"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.0!2d75.7!3d26.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzAwLjAiTiA3NcKwNDInMDAuMCJF!5e0!3m2!1sen!2sin!4v1" width="100%" height="260" style="border:0; border-radius:16px;" allowfullscreen loading="lazy"></iframe></div>
       </div>
     </div>
   </section>
-  <footer><div class="container"><p>&copy; 2026 Sector SSC Classes. All Rights Reserved.</p><p style="margin-top:6px;">Phone: 085020 28502 | Jaipur</p></div></footer>
+
+  <footer><div class="container"><p>&copy; 2026 Sector SSC Classes. All Rights Reserved.</p><p style="margin-top:8px;">Phone: 085020 28502 | Jaipur</p></div></footer>
   <a href="https://wa.me/918502028502" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
   <script>
     const menuToggle = document.getElementById('menuToggle');
     const menu = document.getElementById('menu');
@@ -318,23 +376,24 @@
       link.addEventListener('click', () => menu.classList.remove('active'));
     });
     document.addEventListener('click', function(e) {
-      if (!menu.contains(e.target) && !menuToggle.contains(e.target)) {
-        menu.classList.remove('active');
-      }
+      if (!menu.contains(e.target) && !menuToggle.contains(e.target)) menu.classList.remove('active');
     });
+
     window.addEventListener('scroll', function() {
       const winScroll = document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       document.getElementById('progressBar').style.width = (winScroll / height) * 100 + '%';
     });
-    const reveals = document.querySelectorAll('.reveal');
+
+    const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
     function checkReveal() {
       reveals.forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('active');
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
       });
     }
     window.addEventListener('scroll', checkReveal);
     checkReveal();
+
     const counters = document.querySelectorAll('.stat-number');
     let counted = false;
     function animateCounters() {
@@ -345,16 +404,18 @@
         counters.forEach(c => {
           const target = +c.dataset.target;
           let current = 0;
+          const step = target / 50;
           const timer = setInterval(() => {
-            current += target / 60;
+            current += step;
             if (current >= target) { c.textContent = target; clearInterval(timer); }
             else c.textContent = Math.floor(current);
-          }, 30);
+          }, 35);
         });
       }
     }
     window.addEventListener('scroll', animateCounters);
     animateCounters();
+
     document.getElementById('enquiryForm').addEventListener('submit', function() {
       const btn = document.getElementById('submitBtn');
       const success = document.getElementById('formSuccess');
