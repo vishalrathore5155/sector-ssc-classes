@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
     body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #1e293b; line-height: 1.6; overflow-x: hidden; background: #fff; -webkit-font-smoothing: antialiased; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
     a { text-decoration: none; color: inherit; }
@@ -63,15 +63,21 @@
     .course-body p { font-size: 14px; color: #64748b; margin-bottom: 8px; }
     .price { font-size: 15px; color: #ea580c; font-weight: 700; margin-bottom: 10px; }
     .faculty-section { background: #f8fafc; }
+    .slider-wrapper { position: relative; overflow: hidden; }
+    .slider { display: flex; transition: transform 0.5s ease; }
+    .slide { min-width: 100%; padding: 0 10px; }
     .faculty-grid { display: grid; grid-template-columns: 160px 1fr; gap: 16px; align-items: center; }
     .faculty-card { background: #fff; padding: 20px; border-radius: 16px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
     .faculty-card img { width: 100%; max-width: 140px; border-radius: 12px; }
     .faculty-card h3 { font-size: 16px; color: #1d4ed8; margin-top: 8px; }
     .faculty-card p { font-size: 13px; }
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: #1d4ed8; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 10; font-size: 18px; }
+    .slider-btn.prev { left: 5px; }
+    .slider-btn.next { right: 5px; }
     .testimonials { background: linear-gradient(135deg, #0f172a, #1e3a8a); color: #fff; }
     .testimonials .section-title, .testimonials .section-subtitle { color: #fff; }
-    .testimonial { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; }
-    .testimonial p { font-size: 14px; margin-bottom: 8px; }
+    .testimonial { background: rgba(255,255,255,0.1); padding: 24px; border-radius: 16px; min-height: 180px; }
+    .testimonial p { font-size: 14px; margin-bottom: 10px; }
     .stars { color: #fbbf24; margin-bottom: 8px; }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .contact-info div { margin-bottom: 14px; font-size: 14px; display: flex; align-items: flex-start; }
@@ -112,6 +118,7 @@
       .course-grid { grid-template-columns: 1fr; }
       .logo { font-size: 16px; }
       .container { padding: 0 16px; padding-left: max(16px, env(safe-area-inset-left)); }
+      .slider-btn { width: 34px; height: 34px; font-size: 16px; }
     }
     @media (max-width: 400px) {
       .process-grid { grid-template-columns: 1fr; }
@@ -188,39 +195,49 @@
     <div class="container">
       <h2 class="section-title reveal">Our Faculty</h2>
       <p class="section-subtitle reveal">Experienced mentors</p>
-      <div class="faculty-card reveal">
-        <div class="faculty-grid">
-          <div style="text-align:center;"><img src="faculty.jpg" alt="Manjeet"><h3>Manjeet Singh Chauhan</h3><p>Founder & English</p><p style="color:#ea580c;font-weight:600;">9+ Years</p></div>
-          <div><p><strong>Manjeet Sir</strong> - Founder with 9+ years experience. Expert in English Grammar & Vocabulary for SSC, Railway, NDA.</p></div>
-        </div>
-      </div>
-      <div class="faculty-card reveal">
-        <div class="faculty-grid">
-          <div style="text-align:center;"><img src="pradeep.jpg" alt="Pradeep"><h3>Pradeep Singh Rathore</h3><p>Founder & Mathematics Faculty</p><p style="color:#ea580c;font-weight:600;">14+ Years</p></div>
-          <div><p><strong>Pradeep Sir</strong> - Founder with 14+ years in Mathematics. Makes complex concepts simple with shortcuts.</p></div>
-        </div>
-      </div>
-      <div class="faculty-card reveal">
-        <div class="faculty-grid">
-          <div style="text-align:center;"><img src="vinit.jpg" alt="Vinit"><h3>Vinit Mangal</h3><p>Reasoning Faculty</p><p style="color:#ea580c;font-weight:600;">12+ Years</p></div>
-          <div><p><strong>Vinit Sir</strong> - 12+ years in Reasoning. Develops logical thinking and problem-solving.</p></div>
-        </div>
-      </div>
-      <div class="faculty-card reveal">
-        <div class="faculty-grid">
-          <div style="text-align:center;"><img src="balveer.jpg" alt="Balveer Sir"><h3>Balveer Sir</h3><p>General Knowledge Faculty</p><p style="color:#ea580c;font-weight:600;">17+ Years</p></div>
-          <div>
-            <p><strong>Balveer Sir</strong> is an experienced General Knowledge Faculty with <strong>17+ years</strong> of teaching experience.</p>
-            <p style="margin-top:8px;">Expert in Indian History, Geography, Polity, General Science, Economy & Current Affairs for SSC, Railway, NDA exams.</p>
+      <div class="slider-wrapper">
+        <button class="slider-btn prev" onclick="moveFaculty(-1)">‹</button>
+        <button class="slider-btn next" onclick="moveFaculty(1)">›</button>
+        <div class="slider" id="facultySlider">
+          <div class="slide">
+            <div class="faculty-card">
+              <div class="faculty-grid">
+                <div style="text-align:center;"><img src="faculty.jpg" alt="Manjeet"><h3>Manjeet Singh Chauhan</h3><p>Founder & English</p><p style="color:#ea580c;font-weight:600;">9+ Years</p></div>
+                <div><p><strong>Manjeet Sir</strong> - Founder with 9+ years experience. Expert in English Grammar & Vocabulary for SSC, Railway, NDA.</p></div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="faculty-card reveal">
-        <div class="faculty-grid">
-          <div style="text-align:center;"><img src="gautam.jpg" alt="Gautam Sir"><h3>Gautam Sir</h3><p>Political Science & Polity</p><p style="color:#ea580c;font-weight:600;">8+ Years</p></div>
-          <div>
-            <p><strong>Gautam Sir</strong> specializes in Indian Polity & Political Science with <strong>8+ years</strong> of experience.</p>
-            <p style="margin-top:8px;">Expert in Indian Constitution, Fundamental Rights, Parliament, Judiciary and Governance for competitive exams.</p>
+          <div class="slide">
+            <div class="faculty-card">
+              <div class="faculty-grid">
+                <div style="text-align:center;"><img src="pradeep.jpg" alt="Pradeep"><h3>Pradeep Singh Rathore</h3><p>Founder & Mathematics Faculty</p><p style="color:#ea580c;font-weight:600;">14+ Years</p></div>
+                <div><p><strong>Pradeep Sir</strong> - Founder with 14+ years in Mathematics. Makes complex concepts simple with shortcuts.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="faculty-card">
+              <div class="faculty-grid">
+                <div style="text-align:center;"><img src="vinit.jpg" alt="Vinit"><h3>Vinit Mangal</h3><p>Reasoning Faculty</p><p style="color:#ea580c;font-weight:600;">12+ Years</p></div>
+                <div><p><strong>Vinit Sir</strong> - 12+ years in Reasoning. Develops logical thinking and problem-solving.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="faculty-card">
+              <div class="faculty-grid">
+                <div style="text-align:center;"><img src="balveer.jpg" alt="Balveer Sir"><h3>Balveer Sir</h3><p>General Knowledge Faculty</p><p style="color:#ea580c;font-weight:600;">17+ Years</p></div>
+                <div><p><strong>Balveer Sir</strong> is an experienced General Knowledge Faculty with <strong>17+ years</strong> of teaching experience. Expert in History, Geography, Polity, Science & Current Affairs.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="faculty-card">
+              <div class="faculty-grid">
+                <div style="text-align:center;"><img src="gautam.jpg" alt="Gautam Sir"><h3>Gautam Sir</h3><p>Political Science & Polity</p><p style="color:#ea580c;font-weight:600;">8+ Years</p></div>
+                <div><p><strong>Gautam Sir</strong> specializes in Indian Polity & Political Science with <strong>8+ years</strong> of experience. Expert in Constitution and Governance.</p></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -241,39 +258,46 @@
       </div>
     </div>
   </section>
-  <section class="testimonials">
+  <section class="testimonials" id="testimonials">
     <div class="container">
-      <h2 class="section-title reveal">Testimonials</h2>
-      <p class="section-subtitle reveal">What students say</p>
-      <div class="grid">
-        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Teachers explain clearly. Mock tests helped a lot."</p><strong>Rohit Sharma</strong><br><small>SSC CGL Selected</small></div>
-        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Best coaching in Jhotwara area."</p><strong>Priya Yadav</strong><br><small>SSC CHSL Selected</small></div>
-        <div class="testimonial reveal"><div class="stars">★★★★★</div><p>"Faculty is supportive. Cleared with confidence."</p><strong>Amit Kumar</strong><br><small>SSC GD Selected</small></div>
+      <h2 class="section-title reveal">Student Testimonials</h2>
+      <p class="section-subtitle reveal">What our selected students say</p>
+      <div class="slider-wrapper">
+        <button class="slider-btn prev" onclick="moveTestimonial(-1)">‹</button>
+        <button class="slider-btn next" onclick="moveTestimonial(1)">›</button>
+        <div class="slider" id="testimonialSlider">
+          <div class="slide"><div class="testimonial"><div class="stars">★★★★★</div><p>"Teachers explain concepts very clearly. Regular mock tests helped me improve speed and accuracy. Highly recommended!"</p><strong>Rohit Sharma</strong><br><small>SSC CGL Selected</small></div></div>
+          <div class="slide"><div class="testimonial"><div class="stars">★★★★★</div><p>"Best coaching in Jhotwara. Study material is excellent and faculty is very supportive."</p><strong>Priya Yadav</strong><br><small>SSC CHSL Selected</small></div></div>
+          <div class="slide"><div class="testimonial"><div class="stars">★★★★★</div><p>"Faculty is very supportive. Cleared my exam with good preparation and confidence."</p><strong>Amit Kumar</strong><br><small>SSC GD Selected</small></div></div>
+          <div class="slide"><div class="testimonial"><div class="stars">★★★★★</div><p>"Manjeet Sir's English classes are the best. Grammar became easy and I scored well in SSC."</p><strong>Neha Sharma</strong><br><small>SSC CGL Selected</small></div></div>
+          <div class="slide"><div class="testimonial"><div class="stars">★★★★★</div><p>"Pradeep Sir made Mathematics simple. Shortcut techniques helped me a lot in the exam."</p><strong>Vikram Singh</strong><br><small>Railway Selected</small></div></div>
+          <div class="slide"><div class="testimonial"><div class="stars">★★★★★</div><p>"Small batches and personal attention. Doubt clearing sessions are very helpful."</p><strong>Anjali Verma</strong><br><small>Delhi Police Selected</small></div></div>
+        </div>
       </div>
     </div>
   </section>
   <section class="cta">
     <div class="container">
-      <h2>Start Today</h2>
-      <p>Limited seats available</p>
+      <h2>Start Your Preparation Today</h2>
+      <p>Limited seats available. Fill the form or WhatsApp now.</p>
       <a href="#enquiry" class="btn" style="background:#25d366;">Enquire Now</a>
     </div>
   </section>
   <section class="enquiry" id="enquiry">
     <div class="container">
       <h2 class="section-title reveal">Enquire Now</h2>
-      <p class="section-subtitle reveal">We will contact you soon</p>
+      <p class="section-subtitle reveal">Fill the form and we will contact you</p>
       <div style="max-width:450px;margin:0 auto;">
         <form class="enquiry-form reveal" id="enquiryForm" action="https://formsubmit.co/f874453fbe736ec95be99977914ed7b8" method="POST" target="hiddenFrame">
           <input type="hidden" name="_subject" value="New Enquiry - Sector SSC Classes">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
-          <div class="form-group"><label>Name *</label><input type="text" name="name" required placeholder="Your name"></div>
-          <div class="form-group"><label>Phone *</label><input type="tel" name="phone" required placeholder="Your phone"></div>
+          <div class="form-group"><label>Full Name *</label><input type="text" name="name" required placeholder="Your name"></div>
+          <div class="form-group"><label>Phone Number *</label><input type="tel" name="phone" required placeholder="Your phone"></div>
           <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="Your email"></div>
           <div class="form-group"><label>Course *</label><select name="course" required><option value="">Select</option><option>SSC CGL</option><option>SSC CHSL</option><option>SSC MTS & GD</option><option>Railway</option><option>Stenographer</option><option>Delhi Police</option><option>CET</option><option>Other</option></select></div>
           <div class="form-group"><label>Message</label><textarea name="message" placeholder="Any query?"></textarea></div>
-          <button type="submit" class="btn" id="submitBtn" style="width:100%;">Submit</button>
+          <button type="submit" class="btn" id="submitBtn" style="width:100%;">Submit Enquiry</button>
           <div class="form-success" id="formSuccess">Thank you! We will contact you soon.</div>
         </form>
         <iframe name="hiddenFrame" id="hiddenFrame"></iframe>
@@ -283,20 +307,23 @@
   <section class="contact" id="contact">
     <div class="container">
       <h2 class="section-title reveal">Contact Us</h2>
-      <p class="section-subtitle reveal">Visit or call</p>
+      <p class="section-subtitle reveal">Visit our center or call</p>
       <div class="contact-grid">
         <div class="contact-info reveal">
           <div><i class="fas fa-phone"></i><div><strong>Phone:</strong><br>085020 28502</div></div>
           <div><i class="fab fa-whatsapp"></i><div><strong>WhatsApp:</strong><br>085020 28502</div></div>
-          <div><i class="fas fa-map-marker-alt"></i><div><strong>Address:</strong><br>Ground Floor Morija House, Kanta Choraha,<br>Laxmi Nagar III, Jagannath Puri,<br>Suraj Nagar, Jhotwara, Jaipur 302012</div></div>
+          <div><i class="fas fa-map-marker-alt"></i><div><strong>Address:</strong><br>Ground Floor Morija House, Kanta Choraha,<br>Laxmi Nagar III, Jagannath Puri,<br>Suraj Nagar, Jhotwara, Jaipur,<br>Rajasthan 302012</div></div>
         </div>
-        <div class="reveal"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.0!2d75.7!3d26.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzAwLjAiTiA3NcKwNDInMDAuMCJF!5e0!3m2!1sen!2sin!4v1" width="100%" height="200" style="border:0;border-radius:12px;" allowfullscreen loading="lazy"></iframe></div>
+        <div class="reveal">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.8!2d75.7440105!3d26.9447631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db36d9d01cbcd%3A0x5b2c5f80da40dfd3!2sSector%20SSC!5e0!3m2!1sen!2sin!4v1" width="100%" height="250" style="border:0;border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </div>
   </section>
-  <footer><div class="container"><p>&copy; 2026 Sector SSC Classes</p><p>Phone: 085020 28502 | Jaipur</p></div></footer>
+  <footer><div class="container"><p>&copy; 2026 Sector SSC Classes. All Rights Reserved.</p><p>Phone: 085020 28502 | Jaipur</p></div></footer>
   <a href="https://wa.me/918502028502" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
   <script>
+    // Menu
     document.getElementById('menuToggle').addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -310,11 +337,15 @@
       var toggle = document.getElementById('menuToggle');
       if (!menu.contains(e.target) && !toggle.contains(e.target)) menu.classList.remove('active');
     });
+
+    // Progress bar
     window.addEventListener('scroll', function() {
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       document.getElementById('progressBar').style.width = (scrollTop / height * 100) + '%';
     });
+
+    // Reveal on scroll
     var reveals = document.querySelectorAll('.reveal');
     function checkReveal() {
       for (var i = 0; i < reveals.length; i++) {
@@ -323,6 +354,8 @@
     }
     window.addEventListener('scroll', checkReveal);
     checkReveal();
+
+    // Counters
     var counters = document.querySelectorAll('.stat-number');
     var counted = false;
     function animateCounters() {
@@ -345,6 +378,8 @@
     }
     window.addEventListener('scroll', animateCounters);
     animateCounters();
+
+    // Form
     document.getElementById('enquiryForm').addEventListener('submit', function() {
       var btn = document.getElementById('submitBtn');
       var success = document.getElementById('formSuccess');
@@ -354,9 +389,31 @@
         success.style.display = 'block';
         document.getElementById('enquiryForm').reset();
         btn.textContent = 'Submitted!';
-        setTimeout(function() { btn.textContent = 'Submit'; btn.disabled = false; }, 2000);
+        setTimeout(function() { btn.textContent = 'Submit Enquiry'; btn.disabled = false; }, 2000);
       }, 800);
     });
+
+    // Faculty Slider
+    let facultyIndex = 0;
+    const facultySlides = document.querySelectorAll('#facultySlider .slide');
+    function moveFaculty(dir) {
+      facultyIndex += dir;
+      if (facultyIndex < 0) facultyIndex = facultySlides.length - 1;
+      if (facultyIndex >= facultySlides.length) facultyIndex = 0;
+      document.getElementById('facultySlider').style.transform = 'translateX(-' + (facultyIndex * 100) + '%)';
+    }
+    setInterval(() => moveFaculty(1), 5000);
+
+    // Testimonial Slider
+    let testIndex = 0;
+    const testSlides = document.querySelectorAll('#testimonialSlider .slide');
+    function moveTestimonial(dir) {
+      testIndex += dir;
+      if (testIndex < 0) testIndex = testSlides.length - 1;
+      if (testIndex >= testSlides.length) testIndex = 0;
+      document.getElementById('testimonialSlider').style.transform = 'translateX(-' + (testIndex * 100) + '%)';
+    }
+    setInterval(() => moveTestimonial(1), 4500);
   </script>
 </body>
 </html>
