@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sector SSC Classes | Best SSC Coaching in Jaipur</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; color: #1e293b; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    a { text-decoration: none; }
+    header { background: #fff; box-shadow: 0 2px 15px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 1000; }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; }
+    .logo { font-size: 26px; font-weight: 800; color: #1d4ed8; }
+    .logo span { color: #ea580c; }
+    nav ul { display: flex; list-style: none; gap: 28px; }
+    nav a { color: #334155; font-weight: 500; }
+    nav a:hover { color: #1d4ed8; }
+    .btn { background: #ea580c; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; display: inline-block; }
+    .btn:hover { background: #c2410c; }
+    .menu-toggle { display: none; font-size: 26px; cursor: pointer; }
+    .hero { background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%); color: white; padding: 100px 0 80px; text-align: center; }
+    .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 16px; line-height: 1.2; }
+    .hero p { font-size: 20px; margin-bottom: 30px; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .btn-outline { background: transparent; border: 2px solid white; color: white; }
+    section { padding: 80px 0; }
+    .section-title { text-align: center; font-size: 36px; margin-bottom: 12px; color: #0f172a; }
+    .section-subtitle { text-align: center; color: #64748b; margin-bottom: 50px; font-size: 18px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+    .card { background: white; padding: 30px 24px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); text-align: center; transition: 0.3s; }
+    .card:hover { transform: translateY(-6px); }
+    .card i { font-size: 36px; color: #1d4ed8; margin-bottom: 14px; }
+    .card h3 { margin-bottom: 8px; color: #0f172a; }
+    .courses { background: #f8fafc; }
+    .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+    .course { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 25px rgba(0,0,0,0.08); }
+    .course-header { height: 140px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 700; }
+    .course-body { padding: 24px; }
+    .price { font-size: 24px; color: #ea580c; font-weight: 700; margin: 10px 0; }
+    .testimonials { background: #fff; }
+    .testimonial { background: #f8fafc; padding: 28px; border-radius: 16px; }
+    .stars { color: #fbbf24; margin-bottom: 10px; }
+    .contact { background: #f8fafc; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .contact-info div { margin-bottom: 16px; font-size: 17px; }
+    .contact-info i { color: #1d4ed8; margin-right: 10px; width: 20px; }
+    .cta { background: #1e40af; color: white; text-align: center; padding: 70px 0; }
+    .cta h2 { font-size: 34px; margin-bottom: 12px; }
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px 0; }
+    @media (max-width: 768px) {
+      nav ul { display: none; position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 20px; gap: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+      nav ul.active { display: flex; }
+      .menu-toggle { display: block; }
+      .hero h1 { font-size: 34px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .faculty-grid { grid-template-columns: 1fr !important; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">Sector <span>SSC</span> Classes</div>
+      <nav>
+        <ul id="menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#testimonials">Results</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="btn">Join Now</a>
+      <div class="menu-toggle" onclick="document.getElementById('menu').classList.toggle('active')">☰</div>
+    </div>
+  </header>
+  <section class="hero" id="home">
+    <div class="container">
+      <h1>Best SSC Coaching<br>for Your Success</h1>
+      <p>Expert faculty, regular mock tests & proven results for SSC CGL, CHSL, MTS & GD in Jaipur.</p>
+      <div class="hero-buttons">
+        <a href="#courses" class="btn">View Courses</a>
+        <a href="https://wa.me/918502028502" class="btn btn-outline" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+  </section>
+  <section id="why">
+    <div class="container">
+      <h2 class="section-title">Why Choose Sector SSC Classes</h2>
+      <p class="section-subtitle">Focused preparation with personal attention</p>
+      <div class="grid">
+        <div class="card"><i class="fas fa-chalkboard-teacher"></i><h3>Expert Faculty</h3><p>Experienced teachers with deep knowledge of SSC exam pattern.</p></div>
+        <div class="card"><i class="fas fa-file-alt"></i><h3>Regular Mock Tests</h3><p>Weekly tests to improve speed, accuracy and time management.</p></div>
+        <div class="card"><i class="fas fa-book"></i><h3>Study Material</h3><p>Updated notes, practice sets and previous year papers.</p></div>
+        <div class="card"><i class="fas fa-users"></i><h3>Small Batches</h3><p>Personal attention and doubt clearing in every class.</p></div>
+      </div>
+    </div>
+  </section>
+  <section style="background:#fff;">
+    <div class="container">
+      <h2 class="section-title">Meet Our Founder</h2>
+      <p class="section-subtitle">Expert English Faculty with 9+ Years Experience</p>
+      <div class="faculty-grid" style="display:grid; grid-template-columns: 280px 1fr; gap:40px; align-items:center; margin-top:30px;">
+        <div style="text-align:center;">
+          <img src="faculty.jpg" alt="Manjeet Singh Chauhan" style="width:100%; max-width:260px; border-radius:16px; box-shadow:0 8px 25px rgba(0,0,0,0.15);">
+          <h3 style="margin-top:16px; color:#1d4ed8;">Manjeet Singh Chauhan</h3>
+          <p style="color:#64748b; font-size:15px;">Founder & English Grammar Faculty</p>
+        </div>
+        <div>
+          <p style="margin-bottom:14px;"><strong>Manjeet Singh Chauhan</strong> is an experienced English Grammar Faculty and the Founder of SECTOR SSC Classes, with over <strong>9+ years</strong> of dedicated teaching experience in competitive examination preparation.</p>
+          <p style="margin-bottom:14px;">With a strong command of English Grammar and Vocabulary, he has guided numerous aspirants towards success in SSC, Railway, NDA and XY Group examinations.</p>
+          <p style="margin-bottom:14px;">His teaching approach focuses on building a strong foundation in English, simplifying complex grammatical concepts and helping students develop confidence to solve examination-level questions accurately.</p>
+          <div style="background:#f1f5f9; padding:16px; border-radius:10px; margin-top:16px;">
+            <strong style="color:#1d4ed8;">Areas of Expertise:</strong>
+            <ul style="margin:8px 0 0 18px; color:#334155;">
+              <li>English Grammar & Vocabulary</li>
+              <li>SSC CGL, CHSL, CPO, Stenographer</li>
+              <li>Railway, NDA & XY Group</li>
+              <li>PYQs, Practice Sheets & Regular Tests</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="courses" id="courses">
+    <div class="container">
+      <h2 class="section-title">Our Courses</h2>
+      <p class="section-subtitle">Complete preparation for all SSC exams</p>
+      <div class="course-grid">
+        <div class="course"><div class="course-header" style="background:#1d4ed8;">SSC CGL</div><div class="course-body"><p>Complete coverage of Tier 1 & Tier 2 with mock tests and notes.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
+        <div class="course"><div class="course-header" style="background:#ea580c;">SSC CHSL</div><div class="course-body"><p>Focused preparation for CHSL with regular practice and guidance.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
+        <div class="course"><div class="course-header" style="background:#0f766e;">SSC MTS & GD</div><div class="course-body"><p>Special batches for MTS and GD with concept clarity and tests.</p><div class="price">Contact for Fees</div><a href="#contact" class="btn">Enquire Now</a></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <h2 class="section-title">Student Testimonials</h2>
+      <p class="section-subtitle">What our students say</p>
+      <div class="grid">
+        <div class="testimonial"><div class="stars">★★★★★</div><p>"Teachers explain concepts very clearly. Regular mock tests helped me a lot. Highly recommended for SSC."</p><strong>- Rohit Sharma</strong><br><small>SSC CGL</small></div>
+        <div class="testimonial"><div class="stars">★★★★★</div><p>"Best coaching in Jhotwara area. Study material is excellent and doubt sessions are very helpful."</p><strong>- Priya Yadav</strong><br><small>SSC CHSL</small></div>
+        <div class="testimonial"><div class="stars">★★★★★</div><p>"Faculty is supportive and classes are well structured. Cleared my exam with good preparation."</p><strong>- Amit Kumar</strong><br><small>SSC GD</small></div>
+      </div>
+    </div>
+  </section>
+  <section class="cta">
+    <div class="container">
+      <h2>Start Your SSC Preparation Today</h2>
+      <p>Limited seats available. Call or WhatsApp now.</p>
+      <a href="https://wa.me/918502028502" class="btn" target="_blank" style="background:#25d366; margin-top:10px;"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+    </div>
+  </section>
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-subtitle">Visit our center or call for admission</p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div><i class="fas fa-phone"></i> <strong>Phone:</strong> 085020 28502</div>
+          <div><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> 085020 28502</div>
+          <div><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong><br>Basement Morija, Kanta Choraha,<br>Laxmi Nagar III, Jagannath Puri,<br>Suraj Nagar, Jhotwara, Jaipur,<br>Rajasthan 302012</div>
+        </div>
+        <div>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3557.0!2d75.7!3d26.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzAwLjAiTiA3NcKwNDInMDAuMCJF!5e0!3m2!1sen!2sin!4v1" width="100%" height="280" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Sector SSC Classes. All Rights Reserved.</p>
+      <p style="margin-top:8px;">Phone: 085020 28502 | Jaipur, Rajasthan</p>
+    </div>
+  </footer>
+  <script>
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      document.getElementById('menu').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
